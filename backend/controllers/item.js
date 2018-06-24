@@ -10,9 +10,14 @@ var controller = {
         })
     },
     getItem: function(req,res){
-        return res.status(200).send({
-            message: 'Soy la home'
-        });
+        var itemId = req.params.id;
+        if(itemId == null) return res.status(404).send({message: 'El item no existe.'});
+
+        Item.findById(itemId, (err, item) => {
+            if(err) return res.status(500).send({message: 'Error al devolver item.'});
+            if(!item) return res.status(404).send({message: 'El item no existe.'});
+            return res.status(200).send({item});
+        })
     },
     updateItem: function(req,res){
         return res.status(200).send({

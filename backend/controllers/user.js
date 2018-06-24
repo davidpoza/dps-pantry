@@ -1,6 +1,7 @@
 'use strict'
 var bcrypt = require('bcrypt-nodejs')
 var User = require('../models/user')
+var jwt = require('../services/jwt');
 
 var controller = {
     getUsers: function(req,res){
@@ -86,7 +87,15 @@ var controller = {
             if(user){
                 bcrypt.compare(password, user.password, (err, check) => {
                     if(check){ //comparación correcta
-                        return res.status(200).send({user})
+                        if(params.gettoken){ //si queremos el token en vez de la entidad usuario
+                            return res.status(200).send({
+                                token: jwt.createToken(user)
+                            });
+                        }
+                        else{
+                            user.password = undefined; //quitamos la password de la respuesta
+                            return res.status(200).send({user})
+                        }
                     }
                     else{
                         return res.status(404).send({messsage: 'El usuario no se ha podido identificar.'})

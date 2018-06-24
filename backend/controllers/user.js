@@ -106,6 +106,9 @@ var controller = {
                 return res.status(404).send({messsage: 'El usuario no se ha podido identificar.'})
             }
         });
+    },
+    protegido: function(req,res){
+        return res.status(200).send({message:'ruta protegida'})
     }
 
 }

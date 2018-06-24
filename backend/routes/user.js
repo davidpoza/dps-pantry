@@ -8,11 +8,14 @@ var router = express.Router();
 var multipart = require('connect-multiparty');
 var multipartMiddleware = multipart({ uploadDir: './uploads' });
 
+var md_auth = require('../middleware/authenticated');
+
 router.get('/users', UserController.getUsers);
 router.get('/users/:id', UserController.getUser);
 router.put('/users/:id', UserController.updateUser);
 router.delete('/users/:id', UserController.deleteUser);
 router.post('/users', UserController.addUser);
 router.post('/login', UserController.loginUser);
+router.get('/protegido', md_auth.ensureAuth, UserController.protegido);
 
 module.exports = router;

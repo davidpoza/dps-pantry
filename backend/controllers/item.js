@@ -20,8 +20,12 @@ var controller = {
         })
     },
     updateItem: function(req,res){
-        return res.status(200).send({
-            message: 'Soy la home'
+        var itemId = req.params.id;
+        var update = req.body;
+        Item.findByIdAndUpdate(itemId, update, {new:true}, (err, itemUpdated) => {
+            if(err) return res.status(500).send({message: 'Error al actualizar item.'});
+            if(!itemUpdated) return res.status(404).send({message: 'No existe el item a actualizar'});
+            return res.status(200).send({item: itemUpdated})
         });
     },
     deleteItem: function(req,res){

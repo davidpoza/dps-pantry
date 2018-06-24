@@ -3,9 +3,11 @@ var Item = require('../models/item')
 
 var controller = {
     getItems: function(req,res){
-        return res.status(200).send({
-            message: 'Soy la home'
-        });
+        Item.find({}).exec((err, items) => {
+            if(err) return res.status(500).send({message: 'Error al devolver items.'});
+            if(!items) return res.status(404).send({message: 'No hay items que mostrar.'});
+            return res.status(200).send({items});
+        })
     },
     getItem: function(req,res){
         return res.status(200).send({

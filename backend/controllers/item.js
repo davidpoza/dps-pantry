@@ -29,8 +29,11 @@ var controller = {
         });
     },
     deleteItem: function(req,res){
-        return res.status(200).send({
-            message: 'Soy la home'
+        var itemId = req.params.id;
+        Item.findByIdAndRemove(itemId, (err, itemDeleted) => {
+            if(err) return res.status(500).send({message: 'Error al borrar item.'});
+            if(!itemDeleted) return res.status(404).send({message: 'No existe el item a borrar'});
+            return res.status(200).send({item: itemDeleted})
         });
     },
     addItem: function(req,res){

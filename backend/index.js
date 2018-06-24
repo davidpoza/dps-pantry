@@ -5,7 +5,7 @@ var app = require('./app');
 var port = 3700;
 
 mongoogse.Promise = global.Promise;
-mongoogse.connect('mongodb://localhost:27017/portfolio')
+mongoogse.connect('mongodb://localhost:27017/pantry')
     .then(() => {
         console.log("Conexión con exito");
 

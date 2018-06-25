@@ -33,6 +33,14 @@ var controller = {
             return res.status(200).send({list});
         })
     },
+    deleteList: function(req,res){
+        var listId = req.params.id;
+        List.findByIdAndRemove(listId, (err, listDeleted) => {
+            if(err) return res.status(500).send({message: 'Error al borrar lista.'});
+            if(!listDeleted) return res.status(404).send({message: 'No existe la lista a borrar'});
+            return res.status(200).send({list: listDeleted})
+        });
+    },
 }
 
 module.exports = controller;

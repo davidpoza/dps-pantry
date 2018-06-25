@@ -1,5 +1,6 @@
 'use strict'
 var Item = require('../models/item')
+var List = require('../models/list')
 
 var controller = {
     getItems: function(req,res){
@@ -44,11 +45,18 @@ var controller = {
         item.minimum = params.minimum;
         item.unit = params.unit;
         item.notes = params.notes;
-        item.save((err, itemStored) => {
-            if(err) return res.status(500).send({message: 'Error al guardar item.'});
-            if(!itemStored) return res.status(404).send({message: 'No se ha podido guardar el item.'});
-            return res.status(200).send({item: itemStored});
-        });
+        item.list = params.list;
+
+        /*Comprobamos que existe la lista a la que añadimos el item*/
+        List.findById(params.list, (err, list) => {
+            if(err) return res.status(500).send({message: 'Error al comprobar lista.'});
+            if(!list) return res.status(404).send({message: 'No existe la lista donde estamos guardando el item.'});
+            item.save((err, itemStored) => {
+                if(err) return res.status(500).send({message: 'Error al guardar item.'});
+                if(!itemStored) return res.status(404).send({message: 'No se ha podido guardar el item.'});
+                return res.status(200).send({item: itemStored});
+            });
+        })        
     },
 
 }

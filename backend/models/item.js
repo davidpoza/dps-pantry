@@ -8,7 +8,8 @@ var ItemSchema = Schema({
     quantity: Number,
     minimum: Number,
     unit: String,
-    notes: String
+    notes: String,
+    list: { type: Schema.ObjectId, ref:'List' }
 });
 
 module.exports = mongoose.model('Item', ItemSchema);

@@ -2,13 +2,26 @@
 var bcrypt = require('bcrypt-nodejs')
 var User = require('../models/user')
 var jwt = require('../services/jwt');
+var mongoosePaginate = require('mongoose-pagination');
 
 var controller = {
     getUsers: function(req,res){
-        User.find({}).exec((err, users) => {
+        var identity_user_id = req.user.sub;
+        var page = 1;
+        
+        if(req.params.page){
+            page = req.params.page;
+        }
+        var itemsPerPage = 5;
+
+        User.find().sort('_id').paginate(page, itemsPerPage, (err, users, total) => {
             if(err) return res.status(500).send({message: 'Error al devolver usuarios.'});
             if(!users) return res.status(404).send({message: 'No hay usuarios que mostrar.'});
-            return res.status(200).send({users});
+            return res.status(200).send({
+                users,
+                total,
+                pages: Math.ceil(total/itemsPerPage)
+            });
         })
     },
     getUser: function(req,res){
@@ -108,7 +121,10 @@ var controller = {
         });
     },
     protegido: function(req,res){
-        return res.status(200).send({message:'ruta protegida'})
+        return res.status(200).send({
+            user: req.user,
+            message:'ruta protegida'
+        })
     }
 
 }

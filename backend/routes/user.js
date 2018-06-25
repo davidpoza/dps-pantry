@@ -10,7 +10,7 @@ var multipartMiddleware = multipart({ uploadDir: './uploads' });
 
 var md_auth = require('../middleware/authenticated');
 
-router.get('/users', UserController.getUsers);
+router.get('/users/:page?', md_auth.ensureAuth, UserController.getUsers);
 router.get('/users/:id', UserController.getUser);
 router.put('/users/:id', UserController.updateUser);
 router.delete('/users/:id', UserController.deleteUser);

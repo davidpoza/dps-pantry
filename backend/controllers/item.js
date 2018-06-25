@@ -23,11 +23,28 @@ var controller = {
     updateItem: function(req,res){
         var itemId = req.params.id;
         var update = req.body;
-        Item.findByIdAndUpdate(itemId, update, {new:true}, (err, itemUpdated) => {
-            if(err) return res.status(500).send({message: 'Error al actualizar item.'});
-            if(!itemUpdated) return res.status(404).send({message: 'No existe el item a actualizar'});
-            return res.status(200).send({item: itemUpdated})
-        });
+        var must_update = true;
+        /*solo si pasamos el id de la lista entonces comprobamos que existe dicha lista
+         a la que añadimos el item. Asi evitamos que se guarde un id de lista incorrecto.*/
+        if(update.list){
+            List.findById(update.list, (err, list) => {
+                if(err){
+                    must_update = false;
+                    return res.status(500).send({message: 'Error al comprobar lista.'}); 
+                } 
+                if(!list){
+                    must_update = false;
+                    return res.status(404).send({message: 'No existe la lista donde estamos guardando el item.'});
+                }                
+            })            
+        }
+        if(must_update){   
+            Item.findByIdAndUpdate(itemId, update, {new:true}, (err, itemUpdated) => {
+                if(err) return res.status(500).send({message: 'Error al actualizar item.'});
+                if(!itemUpdated) return res.status(404).send({message: 'No existe el item a actualizar'});
+                return res.status(200).send({item: itemUpdated})
+            });
+        }
     },
     deleteItem: function(req,res){
         var itemId = req.params.id;

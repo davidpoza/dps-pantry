@@ -1,5 +1,6 @@
 'use strict'
 var List = require('../models/list')
+var User = require('../models/user')
 
 var controller = {
     /*crea una lista que pertenece al usuario cuyo id indique
@@ -40,6 +41,33 @@ var controller = {
             if(!listDeleted) return res.status(404).send({message: 'No existe la lista a borrar'});
             return res.status(200).send({list: listDeleted})
         });
+    },
+    updateList: function(req,res){
+        var listId = req.params.id;
+        var update = req.body;
+        /*solo si pasamos el id del usuario propietario de la lista, entonces comprobamos 
+        que existe dicho usuario. Asi evitamos que se guarde un id de usuario incorrecto.*/
+       
+        User.findById(update.user, (err, user) => {
+            if(err){
+                console.log("Error al comprobar usuario propietario.");
+                return res.status(500).send({message: 'Error al comprobar usuario propietario.'}); 
+            } 
+            if(!user){
+                console.log("No existe el usuario propietario de la lista");
+                return res.status(404).send({message: 'No existe el usuario propietario de la lista.'});
+            }
+            
+            List.findByIdAndUpdate(listId, update, {new:true}, (err, listUpdated) => {
+                if(err) return res.status(500).send({message: 'Error al actualizar lista.'});
+                if(!listUpdated) return res.status(404).send({message: 'No existe la lista a actualizar'});
+                return res.status(200).send({list: listUpdated})
+             });      
+        })   
+       
+                     
+        
+        
     },
 }
 

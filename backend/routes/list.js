@@ -12,7 +12,7 @@ var md_auth = require('../middleware/authenticated');
 
 router.get('/lists', md_auth.ensureAuth, ListController.getLists);
 router.get('/lists/:id', ListController.getList);
-//router.put('/lists/:id', md_auth.ensureAuth, ListController.updateList);
+router.put('/lists/:id', md_auth.ensureAuth, ListController.updateList);
 router.delete('/lists/:id', ListController.deleteList);
 router.post('/lists', md_auth.ensureAuth, ListController.addList);
 

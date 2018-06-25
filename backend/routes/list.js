@@ -10,7 +10,7 @@ var multipartMiddleware = multipart({ uploadDir: './uploads' });
 
 var md_auth = require('../middleware/authenticated');
 
-//router.get('/lists/:page?', md_auth.ensureAuth, ListController.getLists);
+router.get('/lists', md_auth.ensureAuth, ListController.getLists);
 //router.get('/lists/:id', ListController.getList);
 //router.put('/lists/:id', md_auth.ensureAuth, ListController.updateList);
 //router.delete('/lists/:id', ListController.deleteList);

@@ -16,6 +16,13 @@ var controller = {
             return res.status(200).send({item: listStored});
         });
     },
+    getLists: function(req,res){
+        List.find({}).exec((err, lists) => {
+            if(err) return res.status(500).send({message: 'Error al devolver listas.'});
+            if(!lists) return res.status(404).send({message: 'No hay listas que mostrar.'});
+            return res.status(200).send({lists});
+        })
+    },
 
 }
 

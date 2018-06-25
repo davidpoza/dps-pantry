@@ -8,6 +8,7 @@ var app = express();
 // cargamos archivo de rutas
 var item_routes = require('./routes/item');
 var user_routes = require('./routes/user');
+var list_routes = require('./routes/list');
 
 //middlewares
 //para que todo lo que llegue por body lo convierta a un objeto json
@@ -28,5 +29,6 @@ app.use((req, res, next) => {
 
 app.use('/api', item_routes);
 app.use('/api', user_routes);
+app.use('/api', list_routes);
 
 module.exports = app;

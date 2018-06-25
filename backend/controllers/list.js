@@ -23,7 +23,16 @@ var controller = {
             return res.status(200).send({lists});
         })
     },
+    getList: function(req,res){
+        var listId = req.params.id;
+        if(listId == null) return res.status(404).send({message: 'La lista no existe.'});
 
+        List.findById(listId).exec((err, list) => {
+            if(err) return res.status(500).send({message: 'Error al devolver lista.'});
+            if(!list) return res.status(404).send({message: 'La lista no existe.'});
+            return res.status(200).send({list});
+        })
+    },
 }
 
 module.exports = controller;

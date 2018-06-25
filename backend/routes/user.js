@@ -12,7 +12,7 @@ var md_auth = require('../middleware/authenticated');
 
 router.get('/users/:page?', md_auth.ensureAuth, UserController.getUsers);
 router.get('/users/:id', UserController.getUser);
-router.put('/users/:id', UserController.updateUser);
+router.put('/users/:id', md_auth.ensureAuth, UserController.updateUser);
 router.delete('/users/:id', UserController.deleteUser);
 router.post('/users', UserController.addUser);
 router.post('/login', UserController.loginUser);

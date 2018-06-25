@@ -37,6 +37,16 @@ var controller = {
     updateUser: function(req,res){
         var userId = req.params.id;
         var update = req.body;
+
+        /*borramos la password de los campos enviados en el body, para cambiarla 
+        crearemos un metodo por separado.*/
+        delete update.password;
+
+        /*solo dejamos que el propio usuario sea quien modifique sus datos*/
+        if(userId != req.user.sub){
+            return res.status(500).send({message:'No tienes permiso para actualizar los datos de usuario.'});
+        }
+
         User.findByIdAndUpdate(userId, update, {new:true}, (err, userUpdated) => {
             if(err) return res.status(500).send({message: 'Error al actualizar usuario.'});
             if(!userUpdated) return res.status(404).send({message: 'No existe el usuario a actualizar'});

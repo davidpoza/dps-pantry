@@ -28,7 +28,23 @@ var controller = {
         
         
     },
-  
+    getShoppingList: function(req,res){
+        var shoppingListId = req.params.id;
+        if(shoppingListId == null) return res.status(404).send({message: 'La lista de la compra no existe.'});
+
+        ShoppingList.findById(shoppingListId).exec((err, shoppingList) => {
+            if(err) return res.status(500).send({message: 'Error al devolver lista de la compra.'});
+            if(!shoppingList) return res.status(404).send({message: 'La lista de la compra no existe.'});
+            return res.status(200).send({shoppingList});
+        })
+    },
+    getShoppingLists: function(req,res){
+        ShoppingList.find({}).exec((err, shoppingLists) => {
+            if(err) return res.status(500).send({message: 'Error al devolver listas de la compra.'});
+            if(!shoppingLists) return res.status(404).send({message: 'No hay listas de la compra que mostrar.'});
+            return res.status(200).send({shoppingLists});
+        })
+    },
 }
 
 module.exports = controller;

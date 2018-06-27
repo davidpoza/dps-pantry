@@ -14,7 +14,7 @@ var md_auth = require('../middleware/authenticated');
 router.get('/shoppinglist/:id', md_auth.ensureAuth, ShoppingListController.getShoppingList);
 router.get('/shoppinglist', md_auth.ensureAuth, ShoppingListController.getShoppingLists);
 //router.put('/items/:id', md_auth.ensureAuth, ItemController.updateItem);
-//router.delete('/items/:id', md_auth.ensureAuth, ItemController.deleteItem);
+router.delete('/shoppinglist/:id', md_auth.ensureAuth, ShoppingListController.deleteShoppingList);
 router.post('/shoppinglist', md_auth.ensureAuth, ShoppingListController.addShoppingList);
 
 module.exports = router;

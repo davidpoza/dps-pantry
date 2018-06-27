@@ -35,14 +35,14 @@ var controller = {
             return res.status(200).send({sharedLists});
         })
     },
-    //deleteShoppingList: function(req,res){
-    //    var shoppingListId = req.params.id;
-    //    ShoppingList.findByIdAndRemove(shoppingListId, (err, shoppingListDeleted) => {
-    //        if(err) return res.status(500).send({message: 'Error al borrar lista de la compra.'});
-    //        if(!shoppingListDeleted) return res.status(404).send({message: 'No existe la lista de la compra a borrar'});
-    //        return res.status(200).send({item: shoppingListDeleted})
-    //    });
-    //},
+    deleteSharedList: function(req,res){
+        var sharedListId = req.params.id;
+        SharedList.findByIdAndRemove(sharedListId, (err, sharedListDeleted) => {
+            if(err) return res.status(500).send({message: 'Error al borrar lista compartida.'});
+            if(!sharedListDeleted) return res.status(404).send({message: 'No existe la lista compartida a borrar'});
+            return res.status(200).send({item: sharedListDeleted})
+        });
+    },
     //updateShoppingList: function(req,res){
     //    var shoppingListId = req.params.id;
     //    var update = req.body;

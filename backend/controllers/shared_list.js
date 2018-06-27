@@ -28,13 +28,13 @@ var controller = {
             return res.status(200).send({sharedList});
         })
     },
-    //getShoppingLists: function(req,res){
-    //    ShoppingList.find({}).exec((err, shoppingLists) => {
-    //        if(err) return res.status(500).send({message: 'Error al devolver listas de la compra.'});
-    //        if(!shoppingLists) return res.status(404).send({message: 'No hay listas de la compra que mostrar.'});
-    //        return res.status(200).send({shoppingLists});
-    //    })
-    //},
+    getSharedLists: function(req,res){
+        SharedList.find({}).exec((err, sharedLists) => {
+            if(err) return res.status(500).send({message: 'Error al devolver listas compartidas.'});
+            if(!sharedLists) return res.status(404).send({message: 'No hay listas compartidas que mostrar.'});
+            return res.status(200).send({sharedLists});
+        })
+    },
     //deleteShoppingList: function(req,res){
     //    var shoppingListId = req.params.id;
     //    ShoppingList.findByIdAndRemove(shoppingListId, (err, shoppingListDeleted) => {

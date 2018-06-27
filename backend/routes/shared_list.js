@@ -12,7 +12,7 @@ var md_auth = require('../middleware/authenticated');
 
 
 router.get('/sharedlist/:id', md_auth.ensureAuth, SharedListController.getSharedList);
-//router.get('/shoppinglist', md_auth.ensureAuth, ShoppingListController.getShoppingLists);
+router.get('/sharedlist', md_auth.ensureAuth, SharedListController.getSharedLists);
 //router.put('/shoppinglist/:id', md_auth.ensureAuth, ShoppingListController.updateShoppingList);
 //router.delete('/shoppinglist/:id', md_auth.ensureAuth, ShoppingListController.deleteShoppingList);
 router.post('/sharedlist', md_auth.ensureAuth, SharedListController.addSharedList);

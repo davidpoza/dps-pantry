@@ -53,6 +53,16 @@ var controller = {
             return res.status(200).send({item: shoppingListDeleted})
         });
     },
+    updateShoppingList: function(req,res){
+        var shoppingListId = req.params.id;
+        var update = req.body;
+
+        ShoppingList.findByIdAndUpdate(shoppingListId, update, {new:true}, (err, shoppingListUpdated) => {
+            if(err) return res.status(500).send({message: 'Error al actualizar lista de la compra.'});
+            if(!shoppingListUpdated) return res.status(404).send({message: 'No existe la lista de la compra a actualizar'});
+            return res.status(200).send({shoppingList: shoppingListUpdated})
+         });
+    },
 }
 
 module.exports = controller;

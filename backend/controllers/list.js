@@ -22,27 +22,19 @@ var controller = {
     getLists: function(req,res){
         List.find({}).exec((err, lists) => {
             if(err) return res.status(500).send({message: 'Error al devolver listas.'});
-            if(!lists) return res.status(404).send({message: 'No hay listas que mostrar.'});                   
+            if(!lists) return res.status(404).send({message: 'No hay listas que mostrar.'});
             return res.status(200).send({lists});
+            
         })
     },
     getList: function(req,res){
         var listId = req.params.id;
         if(listId == null) return res.status(404).send({message: 'La lista no existe.'});
 
-        List.findById(listId).lean().exec((err, list) => {
+        List.findById(listId).exec((err, list) => {
             if(err) return res.status(500).send({message: 'Error al devolver lista.'});
             if(!list) return res.status(404).send({message: 'La lista no existe.'});
-            /*queremos que list esté disponible desde el siguiente callback para devolver el resultado cuando 
-            tengamos el count */
-            var list = list; 
-            Item.count({'list': list._id}, (err,count) => {
-                console.log(list);
-                if(err) return res.status(500).send({message: 'Error al contar elementos de la lista.'});
-                list.elements = count;
-                return res.status(200).send({list});
-            })   
-            
+            return res.status(200).send({list});
         })
     },
     deleteList: function(req,res){

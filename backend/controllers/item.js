@@ -66,7 +66,14 @@ var controller = {
             item.save((err, itemStored) => {
                 if(err) return res.status(500).send({message: 'Error al guardar item.'});
                 if(!itemStored) return res.status(404).send({message: 'No se ha podido guardar el item.'});
-                return res.status(200).send({item: itemStored});
+                var update = {$inc : {'elements' : 1}};
+                var itemStored = itemStored;
+                List.findByIdAndUpdate({_id:itemStored.list}, update, {new:true}, (err, listUpdated) => {
+                    if(err) return res.status(500).send({message: 'Error al actualizar lista.'});
+                    if(!listUpdated) return res.status(404).send({message: 'No existe la lista a actualizar'});
+                    return res.status(200).send({list: itemStored});
+                 });
+                
             });
         })        
     },

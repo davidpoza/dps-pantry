@@ -46,7 +46,14 @@ var controller = {
         Item.findByIdAndRemove(itemId, (err, itemDeleted) => {
             if(err) return res.status(500).send({message: 'Error al borrar item.'});
             if(!itemDeleted) return res.status(404).send({message: 'No existe el item a borrar'});
-            return res.status(200).send({item: itemDeleted})
+            
+            var update = {$inc : {'elements' : -1}};
+            var itemDeleted = itemDeleted; //hacemos global la variable para que esté disponible en el callback a continuacion
+            List.findByIdAndUpdate({_id:itemDeleted.list}, update, {new:true}, (err, listUpdated) => {
+                if(err) return res.status(500).send({message: 'Error al actualizar lista.'});
+                if(!listUpdated) return res.status(404).send({message: 'No existe la lista a actualizar'});
+                return res.status(200).send({item: itemDeleted});
+            });
         });
     },
     addItem: function(req,res){
@@ -67,11 +74,11 @@ var controller = {
                 if(err) return res.status(500).send({message: 'Error al guardar item.'});
                 if(!itemStored) return res.status(404).send({message: 'No se ha podido guardar el item.'});
                 var update = {$inc : {'elements' : 1}};
-                var itemStored = itemStored;
+                var itemStored = itemStored; //hacemos global la variable para que esté disponible en el callback a continuacion
                 List.findByIdAndUpdate({_id:itemStored.list}, update, {new:true}, (err, listUpdated) => {
                     if(err) return res.status(500).send({message: 'Error al actualizar lista.'});
                     if(!listUpdated) return res.status(404).send({message: 'No existe la lista a actualizar'});
-                    return res.status(200).send({list: itemStored});
+                    return res.status(200).send({item: itemStored});
                  });
                 
             });

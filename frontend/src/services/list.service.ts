@@ -26,4 +26,9 @@ export class ListService{
         let headers = new HttpHeaders().set('Content-Type', 'application/json');
         return this._http.get(this.url+'lists/'+listId, {headers:headers});
     }
+
+    getListItems(listId):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        return this._http.get(this.url+'listitems/'+listId, {headers:headers});
+    }
 }

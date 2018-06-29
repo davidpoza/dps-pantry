@@ -24,3 +24,7 @@ mat-sidenav-container {
     position: fixed;
     z-index: 2;
 }
+
+.content{
+    padding-top: 70px;
+}

@@ -1,9 +1,10 @@
 <mat-list>
   <h3 mat-subheader>Listas</h3>
-  <mat-list-item *ngFor="let list of lists">
+  <div *ngFor="let list of lists">
+  <mat-list-item [routerLink]="['/list/',list._id]"  >
       <mat-icon mat-list-icon>folder</mat-icon>
       <h4 mat-line>{{list.name}}</h4>
       <p mat-line>{{list.elements}} elementos</p>
   </mat-list-item>
-
+</div>
 </mat-list>

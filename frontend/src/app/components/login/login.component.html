@@ -1,16 +1,16 @@
+
 <div class="container">
-    <div class="row align-items-center justify-content-center">
+    <div class="row justify-content-center">
       <div class="col col-lg-4 ">        
-        <form class="login ">
-       
+        <div class="login" >
           <mat-form-field>
-            <input matInput placeholder="Usuario">
+            <input matInput placeholder="Usuario" [(ngModel)]="user.name">
           </mat-form-field>
+
           <mat-form-field>
-             <input matInput placeholder="Password">
+             <input type="password" matInput placeholder="Password">
           </mat-form-field>
-          <button mat-raised-button color="primary">Entrar</button>
-        </form>       
+          <button mat-raised-button color="primary" (click) = "onClick()">Entrar</button> 
       </div>
 </div>
 </div>

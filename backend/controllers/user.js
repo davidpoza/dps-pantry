@@ -110,7 +110,7 @@ var controller = {
             if(user){
                 bcrypt.compare(password, user.password, (err, check) => {
                     if(check){ //comparación correcta
-                        if(params.gettoken){ //si queremos el token en vez de la entidad usuario
+                        if(params.gettoken == "true"){ //si queremos el token en vez de la entidad usuario
                             return res.status(200).send({
                                 token: jwt.createToken(user)
                             });

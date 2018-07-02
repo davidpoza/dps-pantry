@@ -2,9 +2,9 @@
   
     <mat-sidenav #sidenav>
         <mat-nav-list>
-          <a mat-list-item target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a>
-          <a mat-list-item target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a>
-          <a mat-list-item target="_blank" href="https://blog.angular.io/">Angular blog</a>
+          <a mat-list-item [routerLink]="['/login']" >Login</a>
+          <a mat-list-item href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a>
+          <a mat-list-item href="https://blog.angular.io/">Angular blog</a>
         </mat-nav-list>
     </mat-sidenav>
   

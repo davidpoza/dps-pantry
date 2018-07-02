@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row justify-content-center">
       <div class="col col-lg-4 ">        
-        <form #loginForm="ngForm" class="login" >
+        <form #loginForm="ngForm" class="login" (keyup.enter)="onClick()">
           <mat-form-field>
             <input name="email" matInput placeholder="Email" [(ngModel)]="user.email" required>
           </mat-form-field>

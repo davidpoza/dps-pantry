@@ -4,11 +4,11 @@
       <div class="col col-lg-4 ">        
         <div class="login" >
           <mat-form-field>
-            <input matInput placeholder="Usuario" [(ngModel)]="user.name">
+            <input matInput placeholder="Email" [(ngModel)]="user.email">
           </mat-form-field>
 
           <mat-form-field>
-             <input type="password" matInput placeholder="Password">
+             <input type="password" matInput placeholder="Password" [(ngModel)]="user.password">
           </mat-form-field>
           <button mat-raised-button color="primary" (click) = "onClick()">Entrar</button> 
       </div>

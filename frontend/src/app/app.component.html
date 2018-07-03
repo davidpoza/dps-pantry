@@ -2,10 +2,9 @@
   
     <mat-sidenav #sidenav>
         <mat-nav-list>
-          <a *ngIf="!identity" mat-list-item [routerLink]="['/login']" >Login</a>
+          <a *ngIf="!identity" mat-list-item [routerLink]="['/login']" (click)="sidenav.toggle()">Login</a>
           <a *ngIf="identity" mat-list-item>Hola {{identity.name}}!</a>
-          <a mat-list-item href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a>
-          <a mat-list-item href="https://blog.angular.io/">Angular blog</a>
+          <a *ngIf="identity" mat-list-item (click)="logout()" (click)="sidenav.toggle()">Logout</a>
         </mat-nav-list>
     </mat-sidenav>
   

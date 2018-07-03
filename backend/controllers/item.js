@@ -32,22 +32,12 @@ var controller = {
     updateItem: function(req,res){
         var itemId = req.params.id;
         var update = req.body;
-        //hay que enviar el campo list cuando se actualiza un item
-        List.findById(update.list, (err, list) => {
-            if(err){
-                must_update = false;
-                return res.status(500).send({message: 'Error al comprobar lista.'}); 
-            } 
-            if(!list){
-                must_update = false;
-                return res.status(404).send({message: 'No existe la lista donde estamos guardando el item.'});
-            }
-            Item.findByIdAndUpdate(itemId, update, {new:true}, (err, itemUpdated) => {
-                if(err) return res.status(500).send({message: 'Error al actualizar item.'});
-                if(!itemUpdated) return res.status(404).send({message: 'No existe el item a actualizar'});
-                return res.status(200).send({item: itemUpdated})
-            });               
-        })            
+        
+        Item.findByIdAndUpdate(itemId, update, {new:true}, (err, itemUpdated) => {
+            if(err) return res.status(500).send({message: 'Error al actualizar item.'});
+            if(!itemUpdated) return res.status(404).send({message: 'No existe el item a actualizar'});
+            return res.status(200).send({item: itemUpdated})
+        });  
     },
     deleteItem: function(req,res){
         var itemId = req.params.id;

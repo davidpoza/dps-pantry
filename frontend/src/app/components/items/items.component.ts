@@ -72,14 +72,13 @@ export class ItemsComponent implements OnInit, DoCheck {
   }
 
   addQuantity(id,index){
-    this.items[index].quantity++;
-    
     let item = {
-      quantity: this.items[index].quantity
+      quantity: this.items[index].quantity +1
     }
     this._itemService.updateItem(id,item,this.token).subscribe(
       response =>{
         console.log(response);
+        this.items[index].quantity++;
       },
       error => {
         console.log(error);
@@ -87,15 +86,14 @@ export class ItemsComponent implements OnInit, DoCheck {
     );
   }
 
-  removeQuantity(id,index){
-    this.items[index].quantity--;
-    
+  removeQuantity(id,index){  
     let item = {
-      quantity: this.items[index].quantity
+      quantity: this.items[index].quantity +1
     }
     this._itemService.updateItem(id,item,this.token).subscribe(
       response =>{
         console.log(response);
+        this.items[index].quantity--;
       },
       error => {
         console.log(error);

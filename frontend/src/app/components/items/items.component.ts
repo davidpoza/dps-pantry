@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../../models/item';
 import { ListService } from '../../../services/list.service';
+import { UserService } from '../../../services/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -13,21 +14,16 @@ import { Location } from '@angular/common';
 export class ItemsComponent implements OnInit {
   public items: Array<Item>;
   public listName: String;
+  public token;
 
   constructor(
     private _listService: ListService,
+    private _userService: UserService,
     private _router: Router,
     private _route: ActivatedRoute,
     private location: Location
   ) {
-    //this.items = [
-    //  new Item('','Pollo', 1, 1, 'bandeja',''), 
-    //  new Item('','Leche de almendras', 3, 1, 'bricks',''),
-    //  new Item('','Canonigos', 1, 1, 'bolsa',''),
-    //  new Item('','Cereales sin gluten', 1, 1, 'paquete',''),
-    //  new Item('','Edulcorante', 1, 1, 'bote',''),          
-    //  ];
- 
+    this.token = this._userService.getToken();
    }
 
   ngOnInit() {
@@ -40,7 +36,7 @@ export class ItemsComponent implements OnInit {
   }
 
   getItems(id){
-    this._listService.getListItems(id).subscribe(
+    this._listService.getListItems(id,this.token).subscribe(
       response =>{
         console.log(response);
         this.items = response.items;
@@ -53,7 +49,7 @@ export class ItemsComponent implements OnInit {
   }
 
   getList(id){
-    this._listService.getList(id).subscribe(
+    this._listService.getList(id,this.token).subscribe(
       response =>{
         console.log(response);
         this.listName = response.list.name;

@@ -17,18 +17,22 @@ export class ListService{
         return 'Probando';
     }
 
-    getLists():Observable<any>{
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');       
+    getLists(token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
         return this._http.get(this.url+'lists', {headers:headers});
     }
 
-    getList(listId):Observable<any>{
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    getList(listId,token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
         return this._http.get(this.url+'lists/'+listId, {headers:headers});
     }
 
-    getListItems(listId):Observable<any>{
-        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+    getListItems(listId,token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
         return this._http.get(this.url+'listitems/'+listId, {headers:headers});
     }
 }

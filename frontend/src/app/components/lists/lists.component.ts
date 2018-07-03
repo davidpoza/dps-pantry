@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { List } from '../../../models/list';
 import { ListService } from '../../../services/list.service';
+import { UserService } from '../../../services/user.service';
 
 
 @Component({
@@ -12,20 +13,23 @@ import { ListService } from '../../../services/list.service';
 export class ListsComponent implements OnInit {
 
   public lists: Array<List>;
+  public token;
 
   constructor(
-    private _listService: ListService
+    private _listService: ListService,
+    private _userService: UserService,
   ){
-    //this.lists = [new List('','nombre'), new List('','')];
-
+    this.token = this._userService.getToken();
   }
 
   ngOnInit() {
     this.getLists();
+    
+
   }
 
-  getLists(){
-    this._listService.getLists().subscribe(
+  getLists(){    
+    this._listService.getLists(this.token).subscribe(
       response =>{
         this.lists = response.lists;
         

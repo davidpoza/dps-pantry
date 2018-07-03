@@ -20,7 +20,7 @@ export class UserService{
         return 'Probando';
     }
 
-    login(user: User, gettoken): Observable<any>{
+    login(user, gettoken): Observable<any>{
         if(gettoken){
             user.gettoken = gettoken;
         }

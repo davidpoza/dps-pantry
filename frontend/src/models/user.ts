@@ -5,7 +5,6 @@ export class User{
         public nick: string,
         public email: string,
         public password: string,
-        public gettoken: string
     ){
 
     }

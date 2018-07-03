@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service'; 
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
@@ -16,7 +17,9 @@ export class LoginComponent implements OnInit {
   public status: string;
 
   constructor(
-    private _userService: UserService
+    private _userService: UserService,
+    private _route: ActivatedRoute,
+    private _router: Router
   ) { 
     this.user = new User('','','','','',"true");
 
@@ -25,6 +28,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  /*realiza login del usuario */
   onClick(){
     this._userService.login(this.user, "false" ).subscribe(
       response => {
@@ -37,6 +41,7 @@ export class LoginComponent implements OnInit {
             this.status = 'success';
             localStorage.setItem("identity", JSON.stringify(this.identity));
             this.getToken();
+            this._router.navigate(['/']);
           }
           
       },

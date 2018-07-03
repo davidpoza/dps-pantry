@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Item } from '../../../models/item';
 import { ListService } from '../../../services/list.service';
 import { UserService } from '../../../services/user.service';
+import { ItemService } from '../../../services/item.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -9,9 +10,9 @@ import { Location } from '@angular/common';
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css'],
-  providers: [ListService]
+  providers: [ListService,ItemService]
 })
-export class ItemsComponent implements OnInit {
+export class ItemsComponent implements OnInit, DoCheck {
   public items: Array<Item>;
   public listName: String;
   public token;
@@ -19,6 +20,7 @@ export class ItemsComponent implements OnInit {
   constructor(
     private _listService: ListService,
     private _userService: UserService,
+    private _itemService: ItemService,
     private _router: Router,
     private _route: ActivatedRoute,
     private location: Location
@@ -32,6 +34,10 @@ export class ItemsComponent implements OnInit {
       this.getItems(id);
       this.getList(id);
     })
+    
+  }
+
+  ngDoCheck(){
     
   }
 
@@ -63,5 +69,37 @@ export class ItemsComponent implements OnInit {
 
   goBack() {
     this.location.back();
-}
+  }
+
+  addQuantity(id,index){
+    this.items[index].quantity++;
+    
+    let item = {
+      quantity: this.items[index].quantity
+    }
+    this._itemService.updateItem(id,item,this.token).subscribe(
+      response =>{
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+  removeQuantity(id,index){
+    this.items[index].quantity--;
+    
+    let item = {
+      quantity: this.items[index].quantity
+    }
+    this._itemService.updateItem(id,item,this.token).subscribe(
+      response =>{
+        console.log(response);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
 }

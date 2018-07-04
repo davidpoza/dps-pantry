@@ -4,13 +4,16 @@
         <mat-nav-list>
           <a *ngIf="!identity" mat-list-item [routerLink]="['/login']" (click)="sidenav.toggle()">Login</a>
           <a *ngIf="identity" mat-list-item>Hola {{identity.name}}!</a>
-          <a *ngIf="identity" mat-list-item (click)="logout()" (click)="sidenav.toggle()">Logout</a>
+          <a *ngIf="identity" [routerLink]="['/']" [routerLinkActive]="['actived']" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>list_alt</mat-icon>Ver despensa</a>
+          <a *ngIf="identity" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>create_new_folder</mat-icon>Nueva lista</a>
+          <a *ngIf="identity" mat-list-item (click)="sidenav.toggle()"><mat-icon mat-list-icon>shopping_cart</mat-icon>Lista de la compra</a>
+          <a *ngIf="identity" mat-list-item (click)="logout()" (click)="sidenav.toggle()"><mat-icon mat-list-icon>exit_to_app</mat-icon>Cerrar sesión</a>
         </mat-nav-list>
     </mat-sidenav>
   
     <mat-toolbar id="header-toolbar" color="primary">
         <mat-toolbar-row>    
-            <button type="button" mat-button (click)="sidenav.open()">
+            <button type="button" mat-button *ngIf="identity" (click)="sidenav.open()">
                 <mat-icon mat-list-icon>menu</mat-icon> Menu
             </button>
             <span class="example-spacer"></span>
@@ -19,7 +22,8 @@
     </mat-toolbar>
   
     <div class="content">
-        <router-outlet></router-outlet>
+        <router-outlet *ngIf="identity"></router-outlet>
+        <login *ngIf="!identity"></login>
     </div>
     
 </mat-sidenav-container>

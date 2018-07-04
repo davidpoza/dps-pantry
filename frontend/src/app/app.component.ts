@@ -24,6 +24,7 @@ export class AppComponent implements OnInit, DoCheck {
     this.identity = this._userService.getIdentity();
   }
 
+  /* este evento salta cuando añadimos la key identity en el localStorage */
   ngDoCheck(){
     this.identity = this._userService.getIdentity();
   }

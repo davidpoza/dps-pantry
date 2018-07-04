@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { List } from '../../../models/list';
 import { ListService } from '../../../services/list.service';
 import { UserService } from '../../../services/user.service';
@@ -24,8 +24,6 @@ export class ListsComponent implements OnInit {
 
   ngOnInit() {
     this.getLists();
-    
-
   }
 
   getLists(){    
@@ -35,7 +33,7 @@ export class ListsComponent implements OnInit {
         
       },
       error => {
-        console.log(error);
+        console.log();
       }
     );
   }

@@ -39,9 +39,26 @@ export class LoginComponent implements OnInit {
           }
           else{
             this.status = 'success';
-            localStorage.setItem("identity", JSON.stringify(this.identity));
-            this.getToken();
-            this._router.navigate(['/']);
+            
+            this._userService.login(this.user, "true").subscribe(
+              response => {
+                  this.token = response.token;
+                  if(this.token.length <= 0){
+                    this.status = 'error';
+                  }
+                  else{
+                    this.status = 'success';
+                    localStorage.setItem("token", JSON.stringify(this.token));
+                    localStorage.setItem("identity", JSON.stringify(this.identity));
+                    this._router.navigate(['/']);
+                  }
+                  
+              },
+              error => {
+                console.log();
+              }
+            );
+            
           }
           
       },
@@ -51,22 +68,5 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  getToken(){
-    this._userService.login(this.user, "true").subscribe(
-      response => {
-          this.token = response.token;
-          if(this.token.length <= 0){
-            this.status = 'error';
-          }
-          else{
-            this.status = 'success';
-            localStorage.setItem("token", JSON.stringify(this.token));
-          }
-          
-      },
-      error => {
-        console.log();
-      }
-    );
-  }
+
 }

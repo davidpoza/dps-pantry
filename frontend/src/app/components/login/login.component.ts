@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service'; 
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'login',
@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _route: ActivatedRoute,
-    private _router: Router
+    private _router: Router,
+    public snackBar: MatSnackBar
   ) { 
     this.user = new User('','','','','');
 
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
           console.log(response);
           if(!this.identity || !this.identity._id){
             this.status = 'error';
+            
           }
           else{
             this.status = 'success';
@@ -63,7 +65,11 @@ export class LoginComponent implements OnInit {
           
       },
       error => {
-        console.log();
+        this.status = 'error';
+        this.snackBar.open(error.error.message, '', {
+          duration: 500,
+        });
+        console.log(error.error.message);
       }
     );
   }

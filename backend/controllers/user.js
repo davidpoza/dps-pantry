@@ -121,12 +121,12 @@ var controller = {
                         }
                     }
                     else{
-                        return res.status(404).send({messsage: 'El usuario no se ha podido identificar.'})
+                        return res.status(404).send({message: 'El usuario no se ha podido identificar.'})
                     }
                 })
             }
             else{
-                return res.status(404).send({messsage: 'El usuario no se ha podido identificar.'})
+                return res.status(404).send({message: 'El usuario no se ha podido identificar.'})
             }
         });
     },

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { List } from '../../../models/list';
 
 @Component({
   selector: 'app-add-list-form',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-list-form.component.css']
 })
 export class AddListFormComponent implements OnInit {
+  public list:List;
 
-  constructor() { }
+  constructor() {
+    this.list = new List('', '', 0);
+   }
 
   ngOnInit() {
   }

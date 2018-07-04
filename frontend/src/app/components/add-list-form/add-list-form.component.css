@@ -1,0 +1,13 @@
+.addlist{
+    
+    padding: 10px;
+    margin-top: 20%;
+}
+
+.addlist > *{
+    width: 100%;
+}
+
+.addlist h1{
+    margin-bottom: 30px;
+}

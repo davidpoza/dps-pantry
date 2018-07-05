@@ -2,8 +2,8 @@
   <h3 mat-subheader><mat-icon mat-list-icon (click)="goBack()">arrow_back_ios</mat-icon> {{listName}}</h3>
   <mat-list-item *ngFor="let item of items; let i = index">
       <mat-icon mat-list-icon>navigate_next</mat-icon>
-      <h4 mat-line>{{item.name}}</h4>
-      <p mat-line>       
+      <h4 mat-line [class.toReplenish]="item.quantity<=item.minimum">{{item.name}}</h4>
+      <p mat-line [class.toReplenish]="item.quantity<=item.minimum">       
         
          {{item.quantity}} {{item.unit}}
          

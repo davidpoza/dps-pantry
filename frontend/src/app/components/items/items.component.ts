@@ -16,6 +16,7 @@ export class ItemsComponent implements OnInit {
   public items: Array<Item>;
   public listName: String;
   public token;
+  public listId: String;
 
   constructor(
     private _listService: ListService,
@@ -33,6 +34,7 @@ export class ItemsComponent implements OnInit {
       let id = params.id;
       this.getItems(id);
       this.getList(id);
+      this.listId = id;
     })
     
   }
@@ -99,4 +101,5 @@ export class ItemsComponent implements OnInit {
     }
 
   }
+
 }

@@ -28,3 +28,8 @@ mat-sidenav-container {
 .content{
     padding-top: 70px;
 }
+.floating-button{
+    position: fixed !important;
+    bottom:20px !important;
+    right: 20px !important;
+}

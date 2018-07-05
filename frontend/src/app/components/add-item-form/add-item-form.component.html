@@ -3,7 +3,7 @@
       <div class="col col-lg-6 ">
                 
         <form #addListForm="ngForm" class="additem" (keyup.enter)="onClick(addListForm)">
-          <h1>Nuevo item</h1>
+          <h1><mat-icon mat-list-icon (click)="goBack()">arrow_back_ios</mat-icon>Nuevo item</h1>
           <mat-form-field>
             <input name="name" matInput placeholder="Nombre de la lista" [(ngModel)]="item.name" required>
           </mat-form-field>

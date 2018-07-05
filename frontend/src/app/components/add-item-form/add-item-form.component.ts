@@ -4,6 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { ItemService } from '../../../services/item.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-item-form',
@@ -21,6 +22,7 @@ export class AddItemFormComponent implements OnInit {
     private _itemService: ItemService,
     public snackBar: MatSnackBar,
     private _route: ActivatedRoute,
+    private location: Location
   ) { 
     
     this._route.params.subscribe(params => {
@@ -51,4 +53,9 @@ export class AddItemFormComponent implements OnInit {
       }
     );
   }
+
+  goBack() {
+    this.location.back();
+  }
+
 }

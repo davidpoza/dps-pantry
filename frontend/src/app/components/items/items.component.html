@@ -8,12 +8,15 @@
          {{item.quantity}} {{item.unit}}
          
       </p>
-      <button mat-mini-fab (click)="addQuantity(item._id,i)">
+      <button mat-icon-button color="primary" (click)="addQuantity(item._id,i)">
           <mat-icon>add</mat-icon>
        </button>&nbsp;
-     <button mat-mini-fab (click)="removeQuantity(item._id,i)">
+      <button mat-icon-button color="primary" (click)="removeQuantity(item._id,i)">
           <mat-icon>remove</mat-icon>
-       </button>
+      </button>
   </mat-list-item>
 
 </mat-list>
+<button mat-fab color="primary" class="floating-button" [routerLink]="['/additem', listId]">
+  <mat-icon>add</mat-icon>
+</button>

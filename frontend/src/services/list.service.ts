@@ -42,4 +42,10 @@ export class ListService{
         let params = JSON.stringify(list);
         return this._http.post(this.url+'lists/', params, {headers:headers});
     }
+
+    deleteList(listId,token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        return this._http.delete(this.url+'lists/'+listId, {headers:headers});
+    }
 }

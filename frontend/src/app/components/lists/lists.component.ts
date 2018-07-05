@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { List } from '../../../models/list';
 import { ListService } from '../../../services/list.service';
 import { UserService } from '../../../services/user.service';
-
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-lists',
@@ -18,6 +18,7 @@ export class ListsComponent implements OnInit {
   constructor(
     private _listService: ListService,
     private _userService: UserService,
+    public snackBar: MatSnackBar,
   ){
     this.token = this._userService.getToken();
   }
@@ -34,6 +35,22 @@ export class ListsComponent implements OnInit {
       },
       error => {
         console.log();
+      }
+    );
+  }
+
+  deleteList(id,i){
+    this._listService.deleteList(id,this.token).subscribe(
+      response =>{
+        this.lists.splice(i,1);
+        this.snackBar.open("Lista borrada con exito.", '', {
+          duration: 500,
+        });          
+      },
+      error => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 500,
+        });
       }
     );
   }

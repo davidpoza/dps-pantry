@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Item } from '../../../models/item';
 import { ListService } from '../../../services/list.service';
 import { UserService } from '../../../services/user.service';
@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
   styleUrls: ['./items.component.css'],
   providers: [ListService,ItemService]
 })
-export class ItemsComponent implements OnInit, DoCheck {
+export class ItemsComponent implements OnInit {
   public items: Array<Item>;
   public listName: String;
   public token;
@@ -34,10 +34,6 @@ export class ItemsComponent implements OnInit, DoCheck {
       this.getItems(id);
       this.getList(id);
     })
-    
-  }
-
-  ngDoCheck(){
     
   }
 
@@ -88,16 +84,19 @@ export class ItemsComponent implements OnInit, DoCheck {
 
   removeQuantity(id,index){  
     let item = {
-      quantity: this.items[index].quantity +1
+      quantity: this.items[index].quantity -1
     }
-    this._itemService.updateItem(id,item,this.token).subscribe(
-      response =>{
-        console.log(response);
-        this.items[index].quantity--;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    if(item.quantity>=0){
+      this._itemService.updateItem(id,item,this.token).subscribe(
+        response =>{
+          console.log(response);
+          this.items[index].quantity--;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
+
   }
 }

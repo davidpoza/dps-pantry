@@ -5,6 +5,7 @@ import { UserService } from '../../../services/user.service';
 import { ItemService } from '../../../services/item.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-items',
@@ -24,7 +25,8 @@ export class ItemsComponent implements OnInit {
     private _itemService: ItemService,
     private _router: Router,
     private _route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    public snackBar: MatSnackBar,
   ) {
     this.token = this._userService.getToken();
    }
@@ -100,6 +102,22 @@ export class ItemsComponent implements OnInit {
       );
     }
 
+  }
+
+  deleteItem(id,i){
+    this._itemService.deleteItem(id,this.token).subscribe(
+      response =>{
+        this.items.splice(i,1);
+        this.snackBar.open("Item borrado con exito.", '', {
+          duration: 500,
+        });          
+      },
+      error => {
+        this.snackBar.open(error.error.message, '', {
+          duration: 500,
+        });
+      }
+    );
   }
 
 }

@@ -28,5 +28,9 @@ export class ItemService{
         return this._http.post(this.url+'items', params,  {headers:headers});
     }
 
-   
+    deleteItem(itemId,token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        return this._http.delete(this.url+'items/'+itemId, {headers:headers});
+    }
 }

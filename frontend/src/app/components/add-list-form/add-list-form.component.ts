@@ -3,6 +3,7 @@ import { List } from '../../../models/list';
 import { UserService } from '../../../services/user.service';
 import { ListService } from '../../../services/list.service';
 import { MatSnackBar } from '@angular/material';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-list-form',
@@ -17,7 +18,8 @@ export class AddListFormComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _listService: ListService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private location: Location
   ) {
     this.token = this._userService.getToken();
     this.list = new List('', '', 0);
@@ -41,5 +43,7 @@ export class AddListFormComponent implements OnInit {
     );
   }
 
-
+  goBack() {
+    this.location.back();
+  }
 }

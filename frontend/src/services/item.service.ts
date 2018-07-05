@@ -21,5 +21,12 @@ export class ItemService{
         return this._http.put(this.url+'items/'+itemId, params,  {headers:headers});
     }
 
+    addItem(item, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+        let params = JSON.stringify(item);
+        return this._http.post(this.url+'items', params,  {headers:headers});
+    }
+
    
 }

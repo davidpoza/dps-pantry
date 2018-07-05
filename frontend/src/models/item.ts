@@ -5,7 +5,8 @@ export class Item{
         public quantity: number,
         public minimum: number,
         public unit: string,
-        public notes: string
+        public notes: string,
+        public list: string,
     ){
 
     }

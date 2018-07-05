@@ -33,7 +33,8 @@ export class AddListFormComponent implements OnInit {
       response => {
         this.snackBar.open("Lista creada con exito.", '', {
           duration: 500,
-        });           
+        });
+        this.goBack();           
       },
       error => {
         this.snackBar.open(error.error.message, '', {

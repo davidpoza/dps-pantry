@@ -20,7 +20,9 @@ var controller = {
         });
     },
     getLists: function(req,res){
-        List.find({}).exec((err, lists) => {
+        List.find({user:req.user.sub}).exec((err, lists) => {
+            /*hay que obtener las listas del usuario logado
+            y despues añadirle las listas compartidas que tenga ese mismo usuario. */
             if(err) return res.status(500).send({message: 'Error al devolver listas.'});
             if(!lists) return res.status(404).send({message: 'No hay listas que mostrar.'});
             return res.status(200).send({lists});

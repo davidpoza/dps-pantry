@@ -29,10 +29,23 @@ var controller = {
         })
     },
     getSharedLists: function(req,res){
-        SharedList.find({}).exec((err, sharedLists) => {
+        SharedList.find({}).populate('list').exec((err, sharedLists) => {
             if(err) return res.status(500).send({message: 'Error al devolver listas compartidas.'});
             if(!sharedLists) return res.status(404).send({message: 'No hay listas compartidas que mostrar.'});
             return res.status(200).send({sharedLists});
+        })
+    },
+    /* obtiene las listas compartidas con el usuario indicado */
+    getSharedListByUser: function(req,res){
+        var sharedListUser = req.params.user;
+        SharedList.find({user:sharedListUser}).populate('list').lean().exec((err, sharedLists) => {
+            if(err) return res.status(500).send({message: 'Error al devolver listas compartidas.'});
+            if(!sharedLists) return res.status(404).send({message: 'No hay listas compartidas que mostrar.'});
+            let lists = [];
+            for (let i=0;i<sharedLists.length;i++){
+                lists.push(sharedLists[i].list);
+            }
+            return res.status(200).send({lists});
         })
     },
     deleteSharedList: function(req,res){

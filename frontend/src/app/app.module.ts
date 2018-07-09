@@ -19,6 +19,8 @@ import { MatSidenavModule } from '@angular/material';
 import { MatInputModule }  from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddItemFormComponent } from './components/add-item-form/add-item-form.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { AddItemFormComponent } from './components/add-item-form/add-item-form.c
     ItemsComponent,
     LoginComponent,
     AddListFormComponent,
-    AddItemFormComponent
+    AddItemFormComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -41,8 +44,13 @@ import { AddItemFormComponent } from './components/add-item-form/add-item-form.c
     MatToolbarModule,
     MatSidenavModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
   ],
+  entryComponents: [
+    ConfirmationDialogComponent
+  ],
+
   providers: [
     appRoutingProviders
   ],

@@ -3,6 +3,8 @@ import { List } from '../../../models/list';
 import { ListService } from '../../../services/list.service';
 import { UserService } from '../../../services/user.service';
 import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-lists',
@@ -19,6 +21,7 @@ export class ListsComponent implements OnInit {
     private _listService: ListService,
     private _userService: UserService,
     public snackBar: MatSnackBar,
+    public dialog: MatDialog
   ){
     this.token = this._userService.getToken();
   }
@@ -40,18 +43,29 @@ export class ListsComponent implements OnInit {
   }
 
   deleteList(id,i){
-    this._listService.deleteList(id,this.token).subscribe(
-      response =>{
-        this.lists.splice(i,1);
-        this.snackBar.open("Lista borrada con exito.", '', {
-          duration: 500,
-        });          
-      },
-      error => {
-        this.snackBar.open(error.error.message, '', {
-          duration: 500,
-        });
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data:{message: '¿Desea borrar la lista?'}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        // ha pulsado SI, borramos
+        this._listService.deleteList(id,this.token).subscribe(
+          response =>{
+            this.lists.splice(i,1);
+            this.snackBar.open("Lista borrada con exito.", '', {
+              duration: 500,
+            });          
+          },
+          error => {
+            this.snackBar.open(error.error.message, '', {
+              duration: 500,
+            });
+          }
+        );
       }
-    );
+
+    });
+    
+    
   }
 }

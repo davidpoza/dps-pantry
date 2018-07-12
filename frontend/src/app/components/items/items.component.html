@@ -7,7 +7,7 @@
       <p mat-line [class.toReplenish]="item.quantity<item.minimum">       
 
         
-         {{item.quantity}} {{item.unit}}
+         {{item.quantity}} {{item.unit}}/s
          
       </p>
       <button mat-icon-button color="primary" (click)="addQuantity(item._id,i)">

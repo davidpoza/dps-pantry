@@ -15,7 +15,9 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 export class ListsComponent implements OnInit {
 
   public lists: Array<List>;
+  public sharedlists: Array<List>;
   public token;
+  public identity;
 
   constructor(
     private _listService: ListService,
@@ -24,16 +26,31 @@ export class ListsComponent implements OnInit {
     public dialog: MatDialog
   ){
     this.token = this._userService.getToken();
+    this.identity = this._userService.getIdentity();
   }
 
   ngOnInit() {
     this.getLists();
+    this.getSharedLists();
+    console.log(this.identity);
   }
 
   getLists(){    
     this._listService.getLists(this.token).subscribe(
       response =>{
         this.lists = response.lists;
+        
+      },
+      error => {
+        console.log();
+      }
+    );
+  }
+
+  getSharedLists(){
+    this._listService.getSharedLists(this.identity._id, this.token).subscribe(
+      response =>{
+        this.sharedlists = response.lists;
         
       },
       error => {

@@ -2,6 +2,7 @@
 var List = require('../models/list')
 var Item = require('../models/item')
 var User = require('../models/user')
+const mongoose = require('mongoose');
 
 var controller = {
     /*crea una lista que pertenece al usuario cuyo id indique
@@ -32,19 +33,23 @@ var controller = {
     getList: function(req,res){
         var listId = req.params.id;
         if(listId == null) return res.status(404).send({message: 'La lista no existe.'});
-
-        List.findById(listId).exec((err, list) => {
+        var id = mongoose.Types.ObjectId(listId);
+        List.findOne({_id: listId, user:req.user.sub}).exec((err, list) => {
             if(err) return res.status(500).send({message: 'Error al devolver lista.'});
             if(!list) return res.status(404).send({message: 'La lista no existe.'});
             return res.status(200).send({list});
         })
     },
+    /* borramos la lista, que debe pertenecer al usuario logado */
     deleteList: function(req,res){
         var listId = req.params.id;
-        List.findByIdAndRemove(listId, (err, listDeleted) => {
-            if(err) return res.status(500).send({message: 'Error al borrar lista.'});
-            if(!listDeleted) return res.status(404).send({message: 'No existe la lista a borrar'});
-            return res.status(200).send({list: listDeleted})
+        List.findOne({_id: listId, user: req.user.sub}, (err, list) => {            
+            if(err) return res.status(500).send({message: 'Error al seleccionar lista.'});
+            if(!list || list.length == 0) return res.status(404).send({message: 'La lista no existe'});
+            List.remove({_id: listId, user:req.user.sub}).exec((err) => {
+                if(err) return res.status(500).send({message: 'Error al borrar lista.'});
+                return res.status(200).send({list: list})
+            });
         });
     },
     updateList: function(req,res){

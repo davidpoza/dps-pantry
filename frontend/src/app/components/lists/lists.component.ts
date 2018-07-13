@@ -27,12 +27,11 @@ export class ListsComponent implements OnInit {
   ){
     this.token = this._userService.getToken();
     this.identity = this._userService.getIdentity();
+    this.getLists();
+    this.getSharedLists();
   }
 
   ngOnInit() {
-    this.getLists();
-    this.getSharedLists();
-    console.log(this.identity);
   }
 
   getLists(){    

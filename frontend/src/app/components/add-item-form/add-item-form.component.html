@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
       <div class="col col-lg-6 ">
                 
-        <form #addListForm="ngForm" class="additem">
+        <form #addItemForm="ngForm" class="additem">
           <h1><mat-icon mat-list-icon (click)="goBack()">arrow_back_ios</mat-icon>Nuevo item</h1>
           <mat-form-field>
             <input name="name" matInput placeholder="Nombre del item" [(ngModel)]="item.name" required>
@@ -24,7 +24,7 @@
             <input name="notes" matInput placeholder="Notas" [(ngModel)]="item.notes">
           </mat-form-field>
   
-          <button mat-raised-button color="primary" (click) = "onClick(addListForm)" [disabled]="!addListForm.form.valid" >Crear</button> 
+          <button mat-raised-button color="primary" (click) = "onClick(addItemForm)" [disabled]="!addItemForm.form.valid" >Crear</button> 
         </form>
   </div>
   </div>

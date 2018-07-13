@@ -94,7 +94,7 @@ var controller = {
             
         }
         else{
-            res.status(200).send({
+            res.status(500).send({
                 message: 'Es necesario enviar todos los campos.'
             })
         }

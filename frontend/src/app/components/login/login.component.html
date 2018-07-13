@@ -9,7 +9,8 @@
           <mat-form-field>
              <input name="password" type="password" matInput placeholder="Password" [(ngModel)]="user.password" required>
           </mat-form-field>
-          <button mat-raised-button color="primary" (click) = "onClick()" [disabled]="!loginForm.form.valid" >Entrar</button> 
+          <button mat-raised-button color="primary" (click) = "onClick()" [disabled]="!loginForm.form.valid" >Entrar</button>
+          <p style="margin-top: 20px"><a [routerLink]="['/register']">Registrar nuevo usuario</a></p> 
         </form>
 </div>
 </div>

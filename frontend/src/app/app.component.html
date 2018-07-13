@@ -22,7 +22,8 @@
   
     <div class="content">
         <router-outlet *ngIf="identity"></router-outlet>
-        <login *ngIf="!identity"></login>
+        <login *ngIf="!identity && _router.url!='/register'"></login>
+        <register *ngIf="_router.url=='/register'"></register>
     </div>
     
 </mat-sidenav-container>

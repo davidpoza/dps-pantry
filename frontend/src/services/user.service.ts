@@ -29,6 +29,12 @@ export class UserService{
         return this._http.post(this.url+'login/', params, {headers:headers});
     }
 
+    register(user): Observable<any>{        
+        let headers = new HttpHeaders().set('Content-Type', 'application/json');
+        let params = JSON.stringify(user);
+        return this._http.post(this.url+'users/', params, {headers:headers});
+    }
+
     getIdentity(){
         let identity = JSON.parse(localStorage.getItem('identity'));
         if(identity != "undefined"){

@@ -21,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddItemFormComponent } from './components/add-item-form/add-item-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
     LoginComponent,
     AddListFormComponent,
     AddItemFormComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    RegisterUserFormComponent
   ],
   imports: [
     BrowserModule,

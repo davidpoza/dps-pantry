@@ -21,7 +21,7 @@
     </mat-toolbar>
   
     <div class="content">
-        <router-outlet *ngIf="identity"></router-outlet>
+        <router-outlet *ngIf="identity && _router.url!='/register'"></router-outlet>
         <login *ngIf="!identity && _router.url!='/register'"></login>
         <register *ngIf="_router.url=='/register'"></register>
     </div>

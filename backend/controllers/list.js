@@ -2,7 +2,8 @@
 var List = require('../models/list')
 var Item = require('../models/item')
 var User = require('../models/user')
-const mongoose = require('mongoose');
+var SharedList = require('../models/shared_list')
+
 
 var controller = {
     /*crea una lista que pertenece al usuario cuyo id indique
@@ -30,14 +31,24 @@ var controller = {
             
         })
     },
+    /* debemos comprobar que el usuario es el propietario o bien que la lista está compartida para el mismo*/
     getList: function(req,res){
         var listId = req.params.id;
         if(listId == null) return res.status(404).send({message: 'La lista no existe.'});
-        var id = mongoose.Types.ObjectId(listId);
         List.findOne({_id: listId, user:req.user.sub}).exec((err, list) => {
             if(err) return res.status(500).send({message: 'Error al devolver lista.'});
-            if(!list) return res.status(404).send({message: 'La lista no existe.'});
-            return res.status(200).send({list});
+            if(!list) {
+                SharedList.findOne({list: listId, user:req.user.sub}).populate({path: 'list'}).exec((err, sharedlist) => {
+                    if(err) return res.status(500).send({message: 'Error al devolver lista.'});
+                    if(!sharedlist) return res.status(404).send({message: 'El usuario no tiene privilegios para visualizar la lista.'});
+                    var list = sharedlist.list;
+                    return res.status(200).send({list});
+                });
+            }
+            else{
+                return res.status(200).send({list});
+            }
+            
         })
     },
     /* borramos la lista, que debe pertenecer al usuario logado */
@@ -45,7 +56,7 @@ var controller = {
         var listId = req.params.id;
         List.findOne({_id: listId, user: req.user.sub}, (err, list) => {            
             if(err) return res.status(500).send({message: 'Error al seleccionar lista.'});
-            if(!list || list.length == 0) return res.status(404).send({message: 'La lista no existe'});
+            if(!list) return res.status(404).send({message: 'La lista no existe'});
             List.remove({_id: listId, user:req.user.sub}).exec((err) => {
                 if(err) return res.status(500).send({message: 'Error al borrar lista.'});
                 return res.status(200).send({list: list})

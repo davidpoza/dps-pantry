@@ -6,6 +6,7 @@ import { AppService } from '../../../services/app.service';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
 
 @Component({
   selector: 'app-lists',
@@ -81,6 +82,33 @@ export class ListsComponent implements OnInit {
             });
           }
         );
+      }
+
+    });
+    
+    
+  }
+
+  shareList(id,i){
+    let dialogRef = this.dialog.open(ShareDialogComponent, {
+      data:{message: 'Selecciona usuario con quien compartir'}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        // ha pulsado SI, borramos
+        /*this._listService.deleteList(id,this.token).subscribe(
+          response =>{
+            this.lists.splice(i,1);
+            this.snackBar.open("Lista borrada con exito.", '', {
+              duration: 500,
+            });          
+          },
+          error => {
+            this.snackBar.open(error.error.message, '', {
+              duration: 500,
+            });
+          }
+        );*/
       }
 
     });

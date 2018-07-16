@@ -4,7 +4,7 @@
       <mat-icon mat-list-icon [routerLink]="['/list/',list._id]">folder</mat-icon>
       <h4 mat-line [routerLink]="['/list/',list._id]">{{list.name}}</h4>
       <p mat-line [routerLink]="['/list/',list._id]">{{list.elements}} elementos</p>
-      <button mat-icon-button color="primary" (click)="deleteList(sharedlist._id,i)">
+      <button mat-icon-button color="primary" (click)="shareList(list._id,i)">
         <mat-icon>share</mat-icon>
       </button>&nbsp;
       <button mat-icon-button color="primary" (click)="deleteList(list._id,i)">

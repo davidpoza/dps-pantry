@@ -57,4 +57,9 @@ export class UserService{
         return this.token;
     }
 
+    getUsers(token){
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        return this._http.get(this.url+'users/', {headers:headers});
+    }
 }

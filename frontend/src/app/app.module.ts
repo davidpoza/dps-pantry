@@ -20,8 +20,10 @@ import { MatInputModule }  from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AddItemFormComponent } from './components/add-item-form/add-item-form.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import {MatSelectModule} from '@angular/material/select';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
+import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
     AddListFormComponent,
     AddItemFormComponent,
     ConfirmationDialogComponent,
-    RegisterUserFormComponent
+    RegisterUserFormComponent,
+    ShareDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -47,10 +50,12 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
     MatSidenavModule,
     MatInputModule,
     MatSnackBarModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSelectModule
   ],
   entryComponents: [
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ShareDialogComponent
   ],
 
   providers: [

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../../../models/item';
 import { UserService } from '../../../services/user.service';
 import { ItemService } from '../../../services/item.service';
+import { AppService } from '../../../services/app.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
 import { Location } from '@angular/common';
@@ -19,6 +20,7 @@ export class AddItemFormComponent implements OnInit {
 
   constructor(
     private _userService: UserService,
+    private _appService: AppService,
     private _itemService: ItemService,
     public snackBar: MatSnackBar,
     private _route: ActivatedRoute,
@@ -34,7 +36,8 @@ export class AddItemFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this._appService.setShowMenu(false);
+    this._appService.setTitle("");
   }
 
 

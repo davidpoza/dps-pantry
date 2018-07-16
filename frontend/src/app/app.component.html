@@ -12,9 +12,9 @@
   
     <mat-toolbar id="header-toolbar" color="primary">
         <mat-toolbar-row>    
-            <button type="button" mat-button *ngIf="identity" (click)="sidenav.open()">
-                <mat-icon mat-list-icon>menu</mat-icon> Menu
-            </button>
+            <mat-icon mat-list-icon *ngIf="showMenu && identity" (click)="sidenav.open()" style="margin-right: 10px;">menu</mat-icon>
+            <mat-icon mat-list-icon *ngIf="!showMenu && identity" (click)="goBack()" style="margin-right: 10px;">arrow_back_ios</mat-icon>
+            {{title}}
             <span class="example-spacer"></span>
             <h1 id="logo">dpsPantry</h1>
         </mat-toolbar-row>

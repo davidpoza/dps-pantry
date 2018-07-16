@@ -3,6 +3,7 @@ import { Item } from '../../../models/item';
 import { ListService } from '../../../services/list.service';
 import { UserService } from '../../../services/user.service';
 import { ItemService } from '../../../services/item.service';
+import { AppService } from '../../../services/app.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
@@ -25,6 +26,7 @@ export class ItemsComponent implements OnInit {
     private _listService: ListService,
     private _userService: UserService,
     private _itemService: ItemService,
+    private _appService: AppService,
     private _router: Router,
     private _route: ActivatedRoute,
     private location: Location,
@@ -62,7 +64,8 @@ export class ItemsComponent implements OnInit {
       response =>{
         console.log(response);
         this.listName = response.list.name;
-        
+        this._appService.setTitle(response.list.name);
+        this._appService.setShowMenu(false);
       },
       error => {
         console.log(error);

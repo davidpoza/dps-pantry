@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { List } from '../../../models/list';
 import { ListService } from '../../../services/list.service';
 import { UserService } from '../../../services/user.service';
+import { AppService } from '../../../services/app.service';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
@@ -22,6 +23,7 @@ export class ListsComponent implements OnInit {
   constructor(
     private _listService: ListService,
     private _userService: UserService,
+    private _appService: AppService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog
   ){
@@ -32,6 +34,7 @@ export class ListsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this._appService.setTitle("Listas");
   }
 
   getLists(){    

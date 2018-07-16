@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { List } from '../../../models/list';
 import { UserService } from '../../../services/user.service';
+import { AppService } from '../../../services/app.service';
 import { ListService } from '../../../services/list.service';
 import { MatSnackBar } from '@angular/material';
 import { Location } from '@angular/common';
@@ -18,6 +19,7 @@ export class AddListFormComponent implements OnInit {
   constructor(
     private _userService: UserService,
     private _listService: ListService,
+    private _appService: AppService,
     public snackBar: MatSnackBar,
     private location: Location
   ) {
@@ -26,6 +28,8 @@ export class AddListFormComponent implements OnInit {
    }
 
   ngOnInit() {
+    this._appService.setShowMenu(false);
+    this._appService.setTitle("");
   }
 
   onClick(){

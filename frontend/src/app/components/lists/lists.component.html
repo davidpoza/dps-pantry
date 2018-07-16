@@ -1,6 +1,5 @@
 <mat-list>
-  <h3 mat-subheader>Listas</h3>
-  <div *ngFor="let list of lists; let i = index">
+  <div *ngFor="let list of lists; let i = index" class="item">
   <mat-list-item   >
       <mat-icon mat-list-icon [routerLink]="['/list/',list._id]">folder</mat-icon>
       <h4 mat-line [routerLink]="['/list/',list._id]">{{list.name}}</h4>
@@ -10,7 +9,7 @@
       </button>&nbsp;
   </mat-list-item>
 </div>
-<div *ngFor="let sharedlist of sharedlists; let i = index">
+<div *ngFor="let sharedlist of sharedlists; let i = index" class="item">
   <mat-list-item   >
       <mat-icon mat-list-icon [routerLink]="['/list/',sharedlist._id]">folder_shared</mat-icon>
       <h4 mat-line [routerLink]="['/list/',sharedlist._id]">{{sharedlist.name}}</h4>

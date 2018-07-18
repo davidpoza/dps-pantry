@@ -13,6 +13,7 @@ var md_auth = require('../middleware/authenticated');
 
 router.get('/sharedlist/:id', md_auth.ensureAuth, SharedListController.getSharedList);
 router.get('/sharedlistuser/:user', md_auth.ensureAuth, SharedListController.getSharedListByUser);
+router.get('/usersharedlist/:list', md_auth.ensureAuth, SharedListController.getUserBySharedList);
 router.get('/sharedlist', md_auth.ensureAuth, SharedListController.getSharedLists);
 router.put('/sharedlist/:id', md_auth.ensureAuth, SharedListController.updateSharedList);
 router.delete('/sharedlist/:id', md_auth.ensureAuth, SharedListController.deleteSharedList);

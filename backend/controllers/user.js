@@ -37,7 +37,7 @@ var controller = {
     getUserByEmail: function(req,res){
         var email = req.params.email; /* buscamos usando un objeto usuario */
 
-        User.find({email: email}, (err, user) => {
+        User.findOne({email: email}, (err, user) => {
             if(err) return res.status(500).send({message: 'Error al devolver usuario.'});
             if(!user) return res.status(404).send({message: 'El usuario no existe.'});
             return res.status(200).send({user});

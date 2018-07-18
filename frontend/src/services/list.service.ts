@@ -31,6 +31,13 @@ export class ListService{
         return this._http.get(this.url+'sharedlistuser/'+userId, {headers:headers});
     }
 
+    getUserSharedWith(listId, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+
+        return this._http.get(this.url+'usersharedlist/'+listId, {headers:headers});
+    }
+
     getList(listId,token):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);

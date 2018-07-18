@@ -91,7 +91,8 @@ export class ListsComponent implements OnInit {
 
   shareList(id,i){
     let dialogRef = this.dialog.open(ShareDialogComponent, {
-      data:{message: 'Selecciona usuario con quien compartir'}
+      data:{listId: id,
+      message: 'Selecciona usuario con quien compartir'}
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {

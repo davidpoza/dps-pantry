@@ -1,13 +1,13 @@
 <h1 mat-dialog-title>Compartir lista</h1>
     <mat-dialog-content>
       <p>{{data.message}}</p>
-      <mat-form-field>
-      <mat-select placeholder="Usuario">
-        <mat-option *ngFor="let user of users;" [value]="user.email">
-          {{user.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      {{data.listId}}
+     <p>Se ha compartido con los siguientes usuarios:</p>
+     <ul>
+       <li *ngFor="let user of users;">
+       {{user.name}}
+       </li>
+     </ul>
     </mat-dialog-content>
     <mat-dialog-actions>
       <button mat-button (click)="dialogRef.close(false)">Cancelar</button>

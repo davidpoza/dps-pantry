@@ -10,7 +10,7 @@ var controller = {
         var sharedList = new SharedList();
         var params = req.body;
         sharedList.list = params.list;
-        sharedList.user = req.user.sub;
+        sharedList.user = params.user;
             
         sharedList.save(sharedList, (err, sharedListStored) => {
             if(err) return res.status(500).send({message: 'Error al compartir lista.'});

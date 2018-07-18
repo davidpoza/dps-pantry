@@ -1,6 +1,5 @@
 <h1 mat-dialog-title>Compartir lista</h1>
     <mat-dialog-content>
-      <p>{{data.message}}</p>
       {{data.listId}}
      <p>Se ha compartido con los siguientes usuarios:</p>
      <ul>
@@ -8,10 +7,15 @@
        {{user.name}}
        </li>
      </ul>
+     <p>Compartir con:</p>
+     <mat-form-field>
+      <input type="email" pattern=".+@.+" name="email" matInput placeholder="Email" [(ngModel)]="userEmail" required>      
+    </mat-form-field>
+    <button mat-button (click)="dialogRef.close(share(email))">Compartir</button>
     </mat-dialog-content>
+
     <mat-dialog-actions>
-      <button mat-button (click)="dialogRef.close(false)">Cancelar</button>
-      <button mat-button (click)="dialogRef.close(true)">Compartir</button>
+      <button mat-button (click)="dialogRef.close(false)">Cerrar</button>
     </mat-dialog-actions>
   
 

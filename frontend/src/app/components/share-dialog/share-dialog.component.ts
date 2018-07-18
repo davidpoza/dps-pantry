@@ -17,7 +17,9 @@ export interface DialogData {
 export class ShareDialogComponent implements OnInit {
   public token;
   public users;
-
+  public userEmail;
+  public result;
+  
   constructor(
     private _userService: UserService,
     private _listService: ListService,
@@ -43,5 +45,26 @@ export class ShareDialogComponent implements OnInit {
     );
   }
 
-
+  share(){
+    let usuario = this._userService.getUserByEmail(this.userEmail, this.token).subscribe(
+    
+      response =>{
+        var resultado;
+        this._listService.addSharedList(this.data.listId, response.user._id, this.token).subscribe(
+          response =>{
+            this.result = true
+            
+          },
+          error => {
+            this.result = false
+          }
+        );        
+      },
+      error => {
+        this.result = false
+      }
+    );
+    console.log(this.result);
+    return(this.result);
+  }
 }

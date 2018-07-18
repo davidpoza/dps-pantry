@@ -96,20 +96,14 @@ export class ListsComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        // ha pulsado SI, borramos
-        /*this._listService.deleteList(id,this.token).subscribe(
-          response =>{
-            this.lists.splice(i,1);
-            this.snackBar.open("Lista borrada con exito.", '', {
-              duration: 500,
-            });          
-          },
-          error => {
-            this.snackBar.open(error.error.message, '', {
-              duration: 500,
-            });
-          }
-        );*/
+        console.log("resultado:"+result);
+        // hemos compartido la lista con exito
+        this.snackBar.open("Has compartido la lista", '', {
+          duration: 500,
+        });   
+        
+      }else{
+        console.log("resultado: error");
       }
 
     });

@@ -72,6 +72,19 @@ export class ShareDialogComponent implements OnInit {
   }
 
   removeShare(id){
-    alert(id);
+    this._listService.removeSharedList(id,this.token).subscribe(
+      response =>{
+        this.message = "Permiso revocado al usuario con éxito."
+        this.getUsersSharedWith(this.data.listId);
+        
+      },
+      error => {
+        this.message = "Error al revocar permiso al usuario."
+      }
+    );
+    this.showMessage = true;    
+    setTimeout(function() {
+      this.showMessage = false;
+    }.bind(this), 3000);
   }
 }

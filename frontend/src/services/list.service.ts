@@ -49,6 +49,13 @@ export class ListService{
         return this._http.post(this.url+'sharedlist/', params, {headers:headers});
     }
 
+    removeSharedList(sharedListId, token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+            .set('Authorization', token);
+        
+        return this._http.delete(this.url+'sharedlist/'+sharedListId, {headers:headers});
+    }
+
     getList(listId,token):Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
             .set('Authorization', token);

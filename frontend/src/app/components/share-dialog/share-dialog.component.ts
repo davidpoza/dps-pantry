@@ -18,7 +18,8 @@ export class ShareDialogComponent implements OnInit {
   public token;
   public users;
   public userEmail;
-  public result;
+  public message;
+  public showMessage=false;
   
   constructor(
     private _userService: UserService,
@@ -30,7 +31,7 @@ export class ShareDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUsersSharedWith(this.data.listId);
+    //this.getUsersSharedWith(this.data.listId);
   }
 
   getUsersSharedWith(listId){
@@ -52,19 +53,21 @@ export class ShareDialogComponent implements OnInit {
         var resultado;
         this._listService.addSharedList(this.data.listId, response.user._id, this.token).subscribe(
           response =>{
-            this.result = true
-            
+            this.message = "Lista compartida con usuario con éxito."
+            this.getUsersSharedWith(this.data.listId);
           },
           error => {
-            this.result = false
+            this.message = "Error al compartir lista"
           }
         );        
       },
       error => {
-        this.result = false
+        this.message = "El usuario no existe."
       }
     );
-    console.log(this.result);
-    return(this.result);
+    this.showMessage = true;    
+    setTimeout(function() {
+      this.showMessage = false;
+    }.bind(this), 3000);
   }
 }

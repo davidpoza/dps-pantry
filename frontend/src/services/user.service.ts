@@ -57,9 +57,15 @@ export class UserService{
         return this.token;
     }
 
-    getUsers(token){
+    getUsers(token): Observable<any>{
         let headers = new HttpHeaders().set('Content-Type', 'application/json')
         .set('Authorization', token);
         return this._http.get(this.url+'users/', {headers:headers});
+    }
+
+    getUserByEmail(email,token): Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        return this._http.get(this.url+'usersbyemail/'+email, {headers:headers});
     }
 }

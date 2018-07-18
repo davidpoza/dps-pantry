@@ -31,13 +31,13 @@ export class ShareDialogComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getUsersSharedWith(this.data.listId);
+    this.getUsersSharedWith(this.data.listId);
   }
 
   getUsersSharedWith(listId){
     this._listService.getUserSharedWith(listId,this.token).subscribe(
       response =>{
-        this.users = response.users;
+        this.users = response.sharedLists;
         
       },
       error => {
@@ -69,5 +69,9 @@ export class ShareDialogComponent implements OnInit {
     setTimeout(function() {
       this.showMessage = false;
     }.bind(this), 3000);
+  }
+
+  removeShare(id){
+    alert(id);
   }
 }

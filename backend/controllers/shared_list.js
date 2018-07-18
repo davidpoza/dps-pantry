@@ -11,7 +11,7 @@ var controller = {
         var params = req.body;
         sharedList.list = params.list;
         sharedList.user = params.user;
-            
+        /*vamos a comprobar que la lista no este ya compartida con ese usuario*/    
         sharedList.save(sharedList, (err, sharedListStored) => {
             if(err) return res.status(500).send({message: 'Error al compartir lista.'});
             if(!sharedListStored) return res.status(404).send({message: 'No se ha podido compartir la lista.'});
@@ -54,11 +54,8 @@ var controller = {
         SharedList.find({list:list}).populate('user').exec((err, sharedLists) => {
             if(err) return res.status(500).send({message: 'Error al devolver listas compartidas.'});
             if(!sharedLists) return res.status(404).send({message: 'No hay listas compartidas que mostrar.'});
-            let users = [];
-            for (let i=0;i<sharedLists.length;i++){
-                users.push(sharedLists[i].user);
-            }
-            return res.status(200).send({users});
+           
+            return res.status(200).send({sharedLists});
         })
     },
 

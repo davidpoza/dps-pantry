@@ -4,9 +4,9 @@
      <p>Se ha compartido con los siguientes usuarios:</p>
      <span *ngIf="!users">Ninguno</span>
      <ul>
-       <li *ngFor="let user of users;">
-       {{user.name}}
-       </li>
+       <li *ngFor="let sharedlist of users;">
+       {{sharedlist.user.name}} <a (click)="removeShare(sharedlist._id)">[dejar de compartir]</a>
+      </li>
      </ul>
      <p>Compartir con:</p>
      <mat-form-field>

@@ -29,7 +29,7 @@ export class AddItemFormComponent implements OnInit {
     
     this._route.params.subscribe(params => {
     this.listId = params.list;
-    this.item = new Item('','',0,0,'','',this.listId);
+    this.item = new Item('',false,'',0,0,'','',this.listId);
     })
     
     this.token = this._userService.getToken();

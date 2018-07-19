@@ -25,7 +25,7 @@ export class UpdateItemFormComponent implements OnInit {
     private location: Location
   ) {
     this.token = this._userService.getToken();  
-    this.item = new Item('','',0,0,'','','');
+    this.item = new Item('',false,'',0,0,'','','');
     this._route.params.subscribe(params => {
       this._itemService.getItem(params.id, this.token).subscribe(
         response => {

@@ -33,4 +33,10 @@ export class ItemService{
         .set('Authorization', token);
         return this._http.delete(this.url+'items/'+itemId, {headers:headers});
     }
+
+    getItem(itemId,token):Observable<any>{
+        let headers = new HttpHeaders().set('Content-Type', 'application/json')
+        .set('Authorization', token);
+        return this._http.get(this.url+'items/'+itemId, {headers:headers});
+    }
 }

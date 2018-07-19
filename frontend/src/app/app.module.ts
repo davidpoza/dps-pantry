@@ -24,6 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
+import { UpdateItemFormComponent } from './components/update-item-form/update-item-form.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ShareDialogComponent } from './components/share-dialog/share-dialog.com
     AddItemFormComponent,
     ConfirmationDialogComponent,
     RegisterUserFormComponent,
-    ShareDialogComponent
+    ShareDialogComponent,
+    UpdateItemFormComponent
   ],
   imports: [
     BrowserModule,

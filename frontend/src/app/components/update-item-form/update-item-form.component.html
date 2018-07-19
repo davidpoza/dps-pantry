@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col col-lg-6 ">
+              
+      <form #updateItemForm="ngForm" class="updateitem">
+        <h1>Actualizar item</h1>
+        <mat-form-field>
+          <input name="name" matInput placeholder="Nombre del item" [(ngModel)]="item.name" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input name="quantity" matInput type="number" placeholder="Cantidad" [(ngModel)]="item.quantity" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input name="minimum" matInput type="number" placeholder="Cantidad mínima" [(ngModel)]="item.minimum" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input name="unit" matInput placeholder="Unidad" [(ngModel)]="item.unit" required>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input name="notes" matInput placeholder="Notas" [(ngModel)]="item.notes">
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click) = "onClick(updateItemForm)" [disabled]="!updateItemForm.form.valid" >Actualizar</button> 
+      </form>
+</div>
+</div>

@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var ShoppingListSchema = Schema({
     quantity: Number,
+    checked: Boolean,
     user: { type: Schema.ObjectId, ref:'User' },
     item: { type: Schema.ObjectId, ref:'Item' }
 });

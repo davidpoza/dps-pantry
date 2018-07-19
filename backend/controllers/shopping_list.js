@@ -12,6 +12,7 @@ var controller = {
         shoppingList.item = params.item;
         shoppingList.user = req.user.sub;
         shoppingList.quantity = params.quantity;
+        shoppingList.checked = false;
 
         /*Comprobamos el item antes de insertarlo en la lista de la compra*/
                     

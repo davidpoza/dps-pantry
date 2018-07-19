@@ -94,20 +94,7 @@ export class ListsComponent implements OnInit {
       data:{listId: id,
       message: 'Selecciona usuario con quien compartir'}
     });
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        console.log("resultado:"+result);
-        // hemos compartido la lista con exito
-        this.snackBar.open("Has compartido la lista", '', {
-          duration: 500,
-        });   
-        
-      }else{
-        console.log("resultado: error");
-      }
-
-    });
-    
+       
     
   }
 }

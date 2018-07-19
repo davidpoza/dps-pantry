@@ -28,7 +28,7 @@ export class AppComponent implements OnInit, DoCheck {
     private _appService: AppService,
     private _route: ActivatedRoute,
     private location: Location,
-    private _router: Router
+    public _router: Router
   ){
     this.showRegister = false;
     if( this._router.url == '/register' )

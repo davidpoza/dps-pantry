@@ -10,6 +10,9 @@
          {{item.quantity}} {{item.unit}}/s
          
       </p>
+      <button mat-icon-button color="primary" (click)="addToCart(item._id,i)">
+        <mat-icon>add_shopping_cart</mat-icon>
+     </button>&nbsp;
       <button mat-icon-button color="primary" (click)="addQuantity(item._id,i)">
           <mat-icon>add</mat-icon>
        </button>&nbsp;

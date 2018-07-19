@@ -3,6 +3,7 @@ import { Item } from '../../../models/item';
 import { ListService } from '../../../services/list.service';
 import { UserService } from '../../../services/user.service';
 import { ItemService } from '../../../services/item.service';
+import { ShoppingListService } from '../../../services/shoppinglist.service';
 import { AppService } from '../../../services/app.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
@@ -14,12 +15,13 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css'],
-  providers: [ListService,ItemService]
+  providers: [ListService,ItemService,ShoppingListService]
 })
 export class ItemsComponent implements OnInit {
   public items: Array<Item>;
   public listName: String;
   public token;
+  public identity;
   public listId: String;
 
   constructor(
@@ -27,12 +29,14 @@ export class ItemsComponent implements OnInit {
     private _userService: UserService,
     private _itemService: ItemService,
     private _appService: AppService,
+    private _shoppingListService: ShoppingListService,
     private _router: Router,
     private _route: ActivatedRoute,
     private location: Location,
     public snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
+    this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
    }
 
@@ -108,6 +112,26 @@ export class ItemsComponent implements OnInit {
       );
     }
 
+  }
+
+  addToCart(id,i){
+    var item = {
+      item: id,
+      user: this.identity._id,
+      quantity: this.items[i].minimum- this.items[i].quantity
+    }
+    if(item.quantity <= 0) item.quantity = this.items[i].minimum;
+    this._shoppingListService.addItem(item,this.token).subscribe(
+      response =>{
+        this.snackBar.open(`Se ha añadido ${item.quantity} unidades al carro de la compra`, '', {
+          duration: 500,
+        });       
+        
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   deleteItem(id,i){

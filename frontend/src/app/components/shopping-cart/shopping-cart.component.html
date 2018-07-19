@@ -1,9 +1,9 @@
 <mat-list>
   
   <mat-list-item *ngFor="let item of items; let i = index" class="item">
-      <mat-icon mat-list-icon>navigate_next</mat-icon>
-
-      <h4 mat-line>{{item.item.name}}</h4>
+      <mat-icon mat-list-icon (click)="toggleChecked(true,item._id,i)" *ngIf="!item.checked">check_box_outline_blank</mat-icon>
+      <mat-icon mat-list-icon (click)="toggleChecked(false,item._id,i)" *ngIf="item.checked">check_box</mat-icon>
+      <h4 [class.checked]="item.checked" mat-line>{{item.item.name}}</h4>
       <p mat-line>       
 
         

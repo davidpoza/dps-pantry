@@ -54,6 +54,21 @@ export class ShoppingCartComponent implements OnInit {
     );
   }
 
+  toggleChecked(checked,id,index){
+    let item = {
+      checked: checked
+    }
+    this._shoppingListService.updateItem(id,item,this.token).subscribe(
+      response =>{
+        this.items[index].checked = checked;
+      },
+      error => {
+        console.log(error);
+      }
+    );
+    
+  }
+
   addQuantity(id,index){
     let item = {
       quantity: this.items[index].quantity +1

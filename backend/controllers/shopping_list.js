@@ -11,7 +11,7 @@ var controller = {
         var params = req.body;
         shoppingList.item = params.item;
         shoppingList.user = req.user.sub;
-        shoppingList.quantity = req.quantity;
+        shoppingList.quantity = params.quantity;
 
         /*Comprobamos el item antes de insertarlo en la lista de la compra*/
                     
@@ -33,6 +33,16 @@ var controller = {
         if(shoppingListId == null) return res.status(404).send({message: 'La lista de la compra no existe.'});
 
         ShoppingList.findById(shoppingListId).exec((err, shoppingList) => {
+            if(err) return res.status(500).send({message: 'Error al devolver lista de la compra.'});
+            if(!shoppingList) return res.status(404).send({message: 'La lista de la compra no existe.'});
+            return res.status(200).send({shoppingList});
+        })
+    },
+    getShoppingListByUser: function(req,res){
+        var userid = req.params.userid;
+        if(userid == null) return res.status(404).send({message: 'No se ha indicado un usuario'});
+
+        ShoppingList.find({user:userid}).populate('item').exec((err, shoppingList) => {
             if(err) return res.status(500).send({message: 'Error al devolver lista de la compra.'});
             if(!shoppingList) return res.status(404).send({message: 'La lista de la compra no existe.'});
             return res.status(200).send({shoppingList});

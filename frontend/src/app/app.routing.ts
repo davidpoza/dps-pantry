@@ -8,10 +8,12 @@ import { AddListFormComponent } from './components/add-list-form/add-list-form.c
 import { AddItemFormComponent } from './components/add-item-form/add-item-form.component';
 import { UpdateItemFormComponent } from './components/update-item-form/update-item-form.component';
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 const appRoutes: Routes = [
     { path: '', component: ListsComponent},
     { path: 'list/:id', component: ItemsComponent},
+    { path: 'shoppingcart', component: ShoppingCartComponent},
     { path: 'updateitem/:id', component: UpdateItemFormComponent},
     { path: 'login', component: LoginComponent},
     { path: 'addlist', component: AddListFormComponent},

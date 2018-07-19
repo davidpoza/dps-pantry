@@ -25,6 +25,7 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { RegisterUserFormComponent } from './components/register-user-form/register-user-form.component';
 import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
 import { UpdateItemFormComponent } from './components/update-item-form/update-item-form.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { UpdateItemFormComponent } from './components/update-item-form/update-it
     ConfirmationDialogComponent,
     RegisterUserFormComponent,
     ShareDialogComponent,
-    UpdateItemFormComponent
+    UpdateItemFormComponent,
+    ShoppingCartComponent
   ],
   imports: [
     BrowserModule,

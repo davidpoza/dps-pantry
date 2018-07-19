@@ -11,12 +11,18 @@ var controller = {
         var params = req.body;
         sharedList.list = params.list;
         sharedList.user = params.user;
-        /*vamos a comprobar que la lista no este ya compartida con ese usuario*/    
-        sharedList.save(sharedList, (err, sharedListStored) => {
-            if(err) return res.status(500).send({message: 'Error al compartir lista.'});
-            if(!sharedListStored) return res.status(404).send({message: 'No se ha podido compartir la lista.'});
-            return res.status(200).send({sharedList: sharedListStored});
-        });        
+        /*vamos a comprobar que la lista no este ya compartida con ese usuario*/
+        SharedList.find({list:params.list, user:params.user}).exec((err, sharedLists) => {
+            if(err) return res.status(500).send({message: 'Error al comprobar existencia de comparticion.'});
+            if(sharedLists.length != 0) return res.status(500).send({message: 'La lista ya está compartida con ese usuario.'});
+            sharedList.save(sharedList, (err, sharedListStored) => {
+                
+                if(err) return res.status(500).send({message: 'Error al compartir lista.'});
+                if(!sharedListStored) return res.status(404).send({message: 'No se ha podido compartir la lista.'});
+                return res.status(200).send({sharedList: sharedListStored});
+            });  
+        })    
+              
     },
     getSharedList: function(req,res){
         var sharedListId = req.params.id;

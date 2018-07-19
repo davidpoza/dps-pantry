@@ -50,19 +50,18 @@ export class ShareDialogComponent implements OnInit {
     let usuario = this._userService.getUserByEmail(this.userEmail, this.token).subscribe(
     
       response =>{
-        var resultado;
         this._listService.addSharedList(this.data.listId, response.user._id, this.token).subscribe(
           response =>{
             this.message = "Lista compartida con usuario con éxito."
             this.getUsersSharedWith(this.data.listId);
           },
           error => {
-            this.message = "Error al compartir lista"
+            this.message = error.error.message;
           }
         );        
       },
       error => {
-        this.message = "El usuario no existe."
+        this.message = error.error.message;
       }
     );
     this.showMessage = true;    

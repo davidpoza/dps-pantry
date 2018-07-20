@@ -47,12 +47,15 @@ export class AddItemFormComponent implements OnInit {
   onClick(form){
     this._itemService.addItem(this.item, this.token).subscribe(
       response => {
-        this._itemService.makeFileRequest(this.url+"uploaditemimage/"+ response.item._id, [], this.filesToUpload, "image", this.token).then((result:any) => {
-          this.snackBar.open("Item añadido con exito.", '', {
-            duration: 500,
+        if(this.filesToUpload) {
+          this._itemService.makeFileRequest(this.url+"uploaditemimage/"+ response.item._id, [], this.filesToUpload, "image", this.token).then((result:any) => {
+            this.snackBar.open("Item añadido con exito.", '', {
+              duration: 500,
+            });
+              
           });
-          form.reset();  
-        });                 
+        }
+        form.reset();                         
       },
       error => {
         this.snackBar.open(error.error.message, '', {

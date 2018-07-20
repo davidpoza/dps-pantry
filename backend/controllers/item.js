@@ -39,6 +39,31 @@ var controller = {
             return res.status(200).send({item: itemUpdated})
         });  
     },
+
+    uploadImage: function(req,res){
+        var itemId = req.params.id;
+        var fileName = "Imagen no subida";
+
+        if(req.files){
+            var filePath = req.files.image.path;
+            var fileSplit = filePath.split("\\");
+            var fileName = fileSplit[1];
+            console.log(fileName);
+            Item.findByIdAndUpdate(itemId, {image: fileName},{new:true}, (err, itemUpdated) => {
+                if(err) return res.status(500).send({message: 'La imagen no se ha subido.'});
+                if(!itemUpdated) return res.status(404).send({message: 'El item no existe.'});
+                return res.status(200).send({
+                    item: itemUpdated
+                });
+            })
+        }
+        else{
+            return res.status(500).send({
+                massage: fileName
+            });
+        }
+    },
+
     deleteItem: function(req,res){
         var itemId = req.params.id;
         Item.findByIdAndRemove(itemId, (err, itemDeleted) => {

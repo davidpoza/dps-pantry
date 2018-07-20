@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 var ItemSchema = Schema({
     name: String,
+    image: String,
     quantity: Number,
     minimum: Number,
     unit: String,

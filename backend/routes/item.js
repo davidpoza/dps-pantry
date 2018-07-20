@@ -17,5 +17,6 @@ router.get('/items/:id', md_auth.ensureAuth, ItemController.getItem);
 router.put('/items/:id', md_auth.ensureAuth, ItemController.updateItem);
 router.delete('/items/:id', md_auth.ensureAuth, ItemController.deleteItem);
 router.post('/items', md_auth.ensureAuth, ItemController.addItem);
+router.post('/uploaditemimage/:id', md_auth.ensureAuth, multipartMiddleware, ItemController.uploadImage);
 
 module.exports = router;

@@ -132,6 +132,33 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
+  empty(){
+    let dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data:{message: '¿Desea vaciar la lista de la compra por completo?'}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        // ha pulsado SI, borramos
+        for(let item of this.items){
+          this._shoppingListService.deleteItem(item._id,this.token).subscribe(
+            response =>{
+              
+            },
+            error => {
+              this.snackBar.open(error.error.message, '', {
+                duration: 500,
+              });
+            }
+          );
+        }
+        this.items = [];
+        
+      }
+
+    });
+
+  }
+
   showImage(ruta){
     let dialogRef = this.dialog.open(ImageDialogComponent, {
       data:{ruta: ruta}

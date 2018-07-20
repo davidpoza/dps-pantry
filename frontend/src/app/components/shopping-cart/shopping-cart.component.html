@@ -1,5 +1,7 @@
 <mat-list>
-  
+  <mat-list-item class="item">
+        <h4 mat-line style="text-align: center" (click)="empty()">Vaciar lista de la compra</h4>
+  </mat-list-item>
   <mat-list-item *ngFor="let item of items; let i = index" class="item">
       <mat-icon mat-list-icon (click)="toggleChecked(true,item._id,i)" *ngIf="!item.checked">check_box_outline_blank</mat-icon>
       <mat-icon mat-list-icon (click)="toggleChecked(false,item._id,i)" *ngIf="item.checked">check_box</mat-icon>

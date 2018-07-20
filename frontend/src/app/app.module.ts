@@ -26,6 +26,7 @@ import { RegisterUserFormComponent } from './components/register-user-form/regis
 import { ShareDialogComponent } from './components/share-dialog/share-dialog.component';
 import { UpdateItemFormComponent } from './components/update-item-form/update-item-form.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ImageDialogComponent } from './components/image-dialog/image-dialog.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
     RegisterUserFormComponent,
     ShareDialogComponent,
     UpdateItemFormComponent,
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ImageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,8 @@ import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.
   ],
   entryComponents: [
     ConfirmationDialogComponent,
-    ShareDialogComponent
+    ShareDialogComponent,
+    ImageDialogComponent
   ],
 
   providers: [

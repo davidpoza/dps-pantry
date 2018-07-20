@@ -10,6 +10,8 @@ import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { ImageDialogComponent } from '../image-dialog/image-dialog.component';
+import { Global } from '../../../services/global';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -21,6 +23,7 @@ export class ShoppingCartComponent implements OnInit {
   public items: Array<Item>;
   public token;
   public identity;
+  public url: String;
 
   constructor(
     private _listService: ListService,
@@ -34,6 +37,7 @@ export class ShoppingCartComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
+    this.url = Global.url;
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
   }
@@ -126,5 +130,12 @@ export class ShoppingCartComponent implements OnInit {
 
     });
 
+  }
+
+  showImage(ruta){
+    let dialogRef = this.dialog.open(ImageDialogComponent, {
+      data:{ruta: ruta}
+    });
+    
   }
 }

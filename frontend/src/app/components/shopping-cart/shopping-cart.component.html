@@ -3,8 +3,9 @@
   <mat-list-item *ngFor="let item of items; let i = index" class="item">
       <mat-icon mat-list-icon (click)="toggleChecked(true,item._id,i)" *ngIf="!item.checked">check_box_outline_blank</mat-icon>
       <mat-icon mat-list-icon (click)="toggleChecked(false,item._id,i)" *ngIf="item.checked">check_box</mat-icon>
-      <h4 [class.checked]="item.checked" mat-line>{{item.item.name}}</h4>
-      <p mat-line>       
+      
+      <h4 mat-line [class.checked]="item.checked" (click)="showImage(url+'getitemimage/'+item.item.image)" >{{item.item.name}}</h4>
+      <p mat-line (click)="showImage(url+'getitemimage/'+item.item.image)" >       
 
         
          {{item.quantity}} {{item.item.unit}}/s

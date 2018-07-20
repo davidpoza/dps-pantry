@@ -10,6 +10,7 @@ import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { Global } from '../../../services/global';
 
 @Component({
   selector: 'app-items',
@@ -23,6 +24,7 @@ export class ItemsComponent implements OnInit {
   public token;
   public identity;
   public listId: String;
+  public url: String;
 
   constructor(
     private _listService: ListService,
@@ -36,6 +38,7 @@ export class ItemsComponent implements OnInit {
     public snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
+    this.url = Global.url;
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
    }

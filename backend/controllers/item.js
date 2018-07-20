@@ -43,6 +43,7 @@ var controller = {
         });  
     },
 
+    /*la imagen se sube con el middleware multiparty*/
     uploadImage: function(req,res){
         var itemId = req.params.id;
         var fileName = "Imagen no subida";
@@ -51,7 +52,6 @@ var controller = {
             var filePath = req.files.image.path;
             var fileSplit = filePath.split("\\");
             var fileName = fileSplit[1];
-            console.log(fileName);
             Item.findByIdAndUpdate(itemId, {image: fileName},{new:true}, (err, itemUpdated) => {
                 if(err) return res.status(500).send({message: 'La imagen no se ha subido.'});
                 if(!itemUpdated) return res.status(404).send({message: 'El item no existe.'});

@@ -1,6 +1,9 @@
 'use strict'
 var Item = require('../models/item')
 var List = require('../models/list')
+var fs = require('fs');
+var path = require('path');
+
 var mongoosePaginate = require('mongoose-pagination');
 
 var controller = {
@@ -62,6 +65,22 @@ var controller = {
                 massage: fileName
             });
         }
+    },
+
+    getImage: function(req, res){
+        var file = req.params.file;
+        var filepath = './uploads/'+file;
+        
+        fs.exists(filepath, (exists) => {
+            if(exists){
+                return res.sendFile(path.resolve(filepath));
+            }
+            else{
+                return res.status(200).send({
+                    message: 'No existe la imagen'
+                })
+            }
+        })
     },
 
     deleteItem: function(req,res){

@@ -23,6 +23,13 @@
           <mat-form-field>
             <input name="notes" matInput placeholder="Notas" [(ngModel)]="item.notes">
           </mat-form-field>
+
+          <p>
+            <input type="file" name="image" placeholder="imagen" (change)="fileChangeEvent($event)">
+
+          </p>
+            
+          
   
           <button mat-raised-button color="primary" (click) = "onClick(addItemForm)" [disabled]="!addItemForm.form.valid" >Crear</button> 
         </form>

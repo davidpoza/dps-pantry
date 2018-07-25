@@ -159,9 +159,10 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
-  showImage(ruta){
+  showImage(ruta, notes){
+    console.log(notes);
     let dialogRef = this.dialog.open(ImageDialogComponent, {
-      data:{ruta: ruta}
+      data:{ruta: ruta, notes: notes}
     });
     
   }

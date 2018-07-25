@@ -16,7 +16,7 @@ var controller = {
     },
     getListItems: function(req,res){
         var listId = req.params.id;
-        Item.find({list: listId}).exec((err, items) => {
+        Item.find({list: listId}).sort('name').exec((err, items) => {
             if(err) return res.status(500).send({message: 'Error al devolver items.'});
             if(!items) return res.status(404).send({message: 'No hay items que mostrar.'});
             return res.status(200).send({items});

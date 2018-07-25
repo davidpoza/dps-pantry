@@ -22,7 +22,7 @@ var controller = {
         });
     },
     getLists: function(req,res){
-        List.find({user:req.user.sub}).exec((err, lists) => {
+        List.find({user:req.user.sub}).sort('name').exec((err, lists) => {
             /*hay que obtener las listas del usuario logado
             y despues añadirle las listas compartidas que tenga ese mismo usuario. */
             if(err) return res.status(500).send({message: 'Error al devolver listas.'});

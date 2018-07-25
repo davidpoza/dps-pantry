@@ -27,6 +27,7 @@ import { ShareDialogComponent } from './components/share-dialog/share-dialog.com
 import { UpdateItemFormComponent } from './components/update-item-form/update-item-form.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { ImageDialogComponent } from './components/image-dialog/image-dialog.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { ImageDialogComponent } from './components/image-dialog/image-dialog.com
   ],
 
   providers: [
-    appRoutingProviders
+    appRoutingProviders,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })

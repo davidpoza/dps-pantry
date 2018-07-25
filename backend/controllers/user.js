@@ -86,7 +86,7 @@ var controller = {
             ]}).exec((err,users) => {
                 if(err) return res.status(500).send({message: 'Error en la petición de usuarios.'})
                 if(users && users.length >= 1){
-                    return res.status(200).send({message: 'El usuario ya existe.'}) 
+                    return res.status(500).send({message: 'El usuario ya existe.'}) 
                 }
                 else{
                     bcrypt.hash(params.password, null, null, (err, hash) => {

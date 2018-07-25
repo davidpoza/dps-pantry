@@ -5,14 +5,14 @@
   <mat-list-item *ngFor="let item of items; let i = index" class="item">
       <mat-icon mat-list-icon (click)="toggleChecked(true,item._id,i)" *ngIf="!item.checked">check_box_outline_blank</mat-icon>
       <mat-icon mat-list-icon (click)="toggleChecked(false,item._id,i)" *ngIf="item.checked">check_box</mat-icon>
-      
-      <h4 mat-line [class.checked]="item.checked" (click)="showImage(url+'getitemimage/'+item.item.image, item.item.notes)" *ngIf="item.item.image" >{{item.item.name}}</h4>
-      <h4 mat-line [class.checked]="item.checked" *ngIf="!item.item.image" >{{item.item.name}}</h4>
-      <p mat-line (click)="showImage(url+'getitemimage/'+item.item.image, item.item.notes)" *ngIf="item.item.image" >
-         {{item.quantity}} {{item.item.unit}}/s         
+      <p>
+      <h4 mat-line [class.checked]="item.checked" (click)="showImage(url+'getitemimage/'+item.item ? item.item.image : '', item.item.notes)" *ngIf="item.item && item.item.image" >{{item.item.name}}</h4>
+      <h4 mat-line [class.checked]="item.checked" *ngIf="item.item && !item.item.image" >{{item.item ? item.item.name : ''}}</h4>
+      <p mat-line (click)="showImage(url+'getitemimage/'+item.item ? item.item.image : '', item.item.notes)" *ngIf="item.item && item.item.image" >
+         {{item.quantity}} {{item.item ? item.item.unit : ''}}/s         
       </p>
-      <p mat-line *ngIf="!item.item.image">
-        {{item.quantity}} {{item.item.unit}}/ssss         
+      <p mat-line *ngIf="item.item && !item.item.image">
+        {{item.quantity}} {{item.item ? item.item.unit : ''}}/s         
      </p>
       <button mat-icon-button color="primary" (click)="addQuantity(item._id,i)">
           <mat-icon>add</mat-icon>

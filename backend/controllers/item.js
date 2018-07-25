@@ -50,6 +50,7 @@ var controller = {
 
         if(req.files){
             var filePath = req.files.image.path;
+            //var fileSplit = filePath.split("/");
             var fileSplit = filePath.split("\\");
             var fileName = fileSplit[1];
             Item.findByIdAndUpdate(itemId, {image: fileName},{new:true}, (err, itemUpdated) => {

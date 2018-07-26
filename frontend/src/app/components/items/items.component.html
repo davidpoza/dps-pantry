@@ -1,5 +1,11 @@
 <mat-list>
-  
+  <div class="search">
+    <mat-icon>search</mat-icon>
+    <input matInput placeholder="Buscar" (input)="onSearch()" [(ngModel)]="search"/>
+  </div>
+  <div *ngIf="search">
+    Resultados:
+  </div>
   <mat-list-item *ngFor="let item of items; let i = index" class="item">
     
     <img matListAvatar  *ngIf="item.image" src="{{url+'getitemimage/'+item.image}}" [routerLink]="['/updateitem/',item._id]" />

@@ -25,6 +25,7 @@ export class ItemsComponent implements OnInit {
   public identity;
   public listId: String;
   public url: String;
+  public search: String;
 
   constructor(
     private _listService: ListService,
@@ -161,6 +162,18 @@ export class ItemsComponent implements OnInit {
 
     });
 
+  }
+
+  onSearch(){
+    this._listService.getListItems(this.listId,this.token).subscribe(
+      response =>{
+        this.items = response.items;
+        this.items = this.items.filter(item => item.name.includes(<string>this.search));        
+      },
+      error => {
+        console.log(error);
+      }
+    ); 
   }
 
 }

@@ -168,7 +168,7 @@ export class ItemsComponent implements OnInit {
     this._listService.getListItems(this.listId,this.token).subscribe(
       response =>{
         this.items = response.items;
-        this.items = this.items.filter(item => item.name.includes(<string>this.search));        
+        this.items = this.items.filter(item => item.name.toLowerCase().includes(<string>this.search.toLowerCase()));        
       },
       error => {
         console.log(error);

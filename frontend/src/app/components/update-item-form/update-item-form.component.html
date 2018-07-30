@@ -24,6 +24,12 @@
           <input name="notes" matInput placeholder="Notas" [(ngModel)]="item.notes">
         </mat-form-field>
 
+        <p>
+          Imagen<br />
+          <input type="file" name="image" placeholder="imagen" (change)="fileChangeEvent($event)">
+
+        </p>
+
         <button mat-raised-button color="primary" (click) = "onClick(updateItemForm)" [disabled]="!updateItemForm.form.valid" >Actualizar</button> 
       </form>
 </div>
